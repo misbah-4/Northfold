@@ -1,0 +1,103 @@
+/* ── Reset ───────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #0b0b0b;
+  font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: #0b0b0b; text-decoration: none; }
+a:hover { color: #ee3524; }
+
+:focus-visible { outline: 2px solid #ee3524; outline-offset: 2px; }
+::selection { background: #ee3524; color: #fff; }
+
+/* ── Tokens ──────────────────────────────────────────────────── */
+:root {
+  --accent:      #ee3524;
+  --black:       #0b0b0b;
+  --white:       #ffffff;
+  --muted:       #5e5e5e;
+  --mid:         #3a3a3a;
+  --border:      #e3e3e0;
+  --dark-border: #2a2a2a;
+  --dark-muted:  #a3a3a3;
+  --surface-dk:  #1c1c1c;
+  --mono:        'IBM Plex Mono', ui-monospace, monospace;
+  --ease:        cubic-bezier(.2,.7,.2,1);
+  --pad-x:       clamp(20px, 4vw, 56px);
+  --max-w:       1600px;
+}
+
+/* ── Utility ─────────────────────────────────────────────────── */
+.mono {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.section-pad {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* ── Image slot placeholder ──────────────────────────────────── */
+.img-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2ef;
+  color: #b0b0aa;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.img-slot--dark {
+  background: var(--surface-dk);
+  color: #5a5a5a;
+}
+
+/* ── Btn ─────────────────────────────────────────────────────── */
+.btn-cta {
+  flex: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  text-decoration: none;
+}
+.btn-cta:hover { background: var(--accent); color: var(--white); }
+
+.btn-cta--sm { min-height: 44px; padding: 0 18px; }
+
+/* ── Scrollbar hide ──────────────────────────────────────────── */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

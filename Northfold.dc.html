@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Northfold — Independent brand &amp; motion studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="./image-slot.js"></script>
+<style>
+html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; color: #0b0b0b; font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; text-wrap: pretty; -webkit-font-smoothing: antialiased; }
+a { color: #0b0b0b; }
+a:hover { color: #ee3524; }
+:focus-visible { outline: 2px solid #ee3524; outline-offset: 2px; }
+::selection { background: #ee3524; color: #ffffff; }
+</style>
+</helmet>
+<div ref="{{ root }}" style="position:relative;overflow-x:clip;">
+
+<header style="position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid {{ navLine }};transition:border-color .3s ease;">
+  <div style="max-width:1600px;margin:0 auto;padding:14px clamp(20px,4vw,56px);display:flex;align-items:center;gap:32px;">
+    <a href="#top" style="font-size:20px;font-weight:900;letter-spacing:-0.03em;text-transform:uppercase;color:#0b0b0b;text-decoration:none;margin-right:auto;">Northfold</a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:28px;align-items:center;font-size:15px;font-weight:500;">
+        <a href="#work" style="color:#0b0b0b;text-decoration:none;" style-hover="color:#ee3524;">Work</a>
+        <a href="#studio" style="color:#0b0b0b;text-decoration:none;" style-hover="color:#ee3524;">Studio</a>
+        <a href="#services" style="color:#0b0b0b;text-decoration:none;" style-hover="color:#ee3524;">Services</a>
+        <a href="#gallery" style="color:#0b0b0b;text-decoration:none;" style-hover="color:#ee3524;">Gallery</a>
+      </nav>
+      <a href="mailto:hello@northfold.studio?subject=New%20project" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;background:#0b0b0b;color:#ffffff;text-decoration:none;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.02em;border-radius:4px;transition:background .25s ease;" style-hover="background:#ee3524;color:#ffffff;">Start a project</a>
+    </sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="min-width:44px;min-height:44px;padding:0 14px;background:transparent;border:1px solid #0b0b0b;border-radius:4px;color:#0b0b0b;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;cursor:pointer;">{{ menuLabel }}</button>
+    </sc-if>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:73px 0 0 0;z-index:45;background:#ffffff;padding:32px clamp(20px,4vw,56px) 40px;display:flex;flex-direction:column;justify-content:space-between;">
+    <nav style="display:flex;flex-direction:column;gap:4px;">
+      <a href="#work" onClick="{{ closeMenu }}" style="font-size:clamp(48px,14vw,88px);font-weight:900;line-height:0.95;letter-spacing:-0.045em;text-transform:uppercase;color:#0b0b0b;text-decoration:none;">Work</a>
+      <a href="#studio" onClick="{{ closeMenu }}" style="font-size:clamp(48px,14vw,88px);font-weight:900;line-height:0.95;letter-spacing:-0.045em;text-transform:uppercase;color:#0b0b0b;text-decoration:none;">Studio</a>
+      <a href="#services" onClick="{{ closeMenu }}" style="font-size:clamp(48px,14vw,88px);font-weight:900;line-height:0.95;letter-spacing:-0.045em;text-transform:uppercase;color:#0b0b0b;text-decoration:none;">Services</a>
+      <a href="#gallery" onClick="{{ closeMenu }}" style="font-size:clamp(48px,14vw,88px);font-weight:900;line-height:0.95;letter-spacing:-0.045em;text-transform:uppercase;color:#0b0b0b;text-decoration:none;">Gallery</a>
+    </nav>
+    <a href="mailto:hello@northfold.studio?subject=New%20project" style="align-self:stretch;display:flex;align-items:center;justify-content:center;min-height:52px;background:#ee3524;color:#ffffff;text-decoration:none;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:14px;text-transform:uppercase;border-radius:4px;">Start a project</a>
+  </div>
+</sc-if>
+
+<section id="top" data-screen-label="Hero" style="max-width:1600px;margin:0 auto;padding:clamp(56px,8vw,120px) clamp(20px,4vw,56px) clamp(40px,5vw,72px);min-height:calc(100svh - 73px);display:flex;flex-direction:column;justify-content:space-between;gap:48px;">
+  <h1 style="font-size:clamp(52px,10vw,160px);font-weight:900;line-height:0.86;letter-spacing:-0.055em;text-transform:uppercase;margin:0 0 0 -0.04em;">
+    <span style="display:block;overflow:hidden;padding-bottom:0.04em;"><span data-hero-line="" style="display:block;">We make brands</span></span>
+    <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-hero-line="" style="display:block;">that <span ref="{{ wordRef }}" style="display:inline-block;color:#ee3524;">{{ word }}</span>.</span></span>
+  </h1>
+  <div data-hero-fade="" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr));gap:32px clamp(32px,6vw,120px);align-items:end;">
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:560px;">
+      <h2 style="font-size:clamp(22px,2vw,28px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin:0;">Independent brand &amp; motion studio</h2>
+      <p style="font-size:17px;line-height:1.55;margin:0;color:#5e5e5e;">Northfold builds identities, campaigns and digital products for companies with something worth saying. Strategy, design and motion under one roof.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;">
+        <a href="mailto:hello@northfold.studio?subject=New%20project" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;background:#0b0b0b;color:#ffffff;text-decoration:none;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;border-radius:4px;transition:background .25s ease;" style-hover="background:#ee3524;color:#ffffff;">Start a project</a>
+      </div>
+    </div>
+    <div style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#5e5e5e;justify-self:start;display:flex;align-items:center;gap:10px;">
+      <span style="width:8px;height:8px;background:#ee3524;display:block;"></span>Now booking projects for 2027
+    </div>
+  </div>
+</section>
+
+<section id="work" data-screen-label="Work" style="max-width:1600px;margin:0 auto;padding:clamp(80px,9vw,140px) clamp(20px,4vw,56px) 0;border-top:1px solid #e3e3e0;">
+  <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(28px,3vw,40px);">
+    <h2 style="font-size:clamp(44px,7vw,112px);font-weight:900;line-height:0.88;letter-spacing:-0.05em;text-transform:uppercase;margin:0 0 0 -0.03em;">Selected work</h2>
+  </div>
+  <div style="display:flex;gap:24px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid #e3e3e0;margin-bottom:clamp(28px,3vw,40px);">
+    <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+      <button type="button" onClick="{{ c.pick }}" style="flex:none;white-space:nowrap;background:transparent;border:0;border-bottom:2px solid {{ c.bd }};margin-bottom:-1px;padding:12px 0;min-height:44px;cursor:pointer;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:{{ c.col }};transition:color .2s ease, border-color .2s ease;" style-hover="color:#0b0b0b;">{{ c.name }}</button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(min(100%, {{ gridMin }}), 1fr));gap:clamp(36px,4vw,56px) clamp(16px,2vw,24px);">
+    <sc-for list="{{ tiles }}" as="p" hint-placeholder-count="4">
+      <a href="{{ p.href }}" data-reveal="" onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" style="display:{{ p.display }};flex-direction:column;gap:14px;text-decoration:none;color:#0b0b0b;">
+        <div style="position:relative;height:391px;overflow:hidden;border-radius:4px;background:#f2f2ef;">
+          <div style="position:absolute;inset:0;transition:transform 1s cubic-bezier(.2,.7,.2,1);transform:{{ p.scale }};">
+            <image-slot id="{{ p.slotId }}" shape="rect" placeholder="{{ p.ph }}"></image-slot>
+          </div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:rgba(11,11,11,0.78);opacity:{{ p.ov }};transition:opacity .4s ease;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(16px,2vw,28px);color:#ffffff;">
+            <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#ee3524;transition:transform .5s cubic-bezier(.2,.7,.2,1);transform:{{ p.ovY }};">{{ p.category }}</span>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;transition:transform .5s cubic-bezier(.2,.7,.2,1);transform:{{ p.ovY2 }};">
+              <span style="font-size:clamp(28px,3.4vw,56px);font-weight:900;line-height:0.9;letter-spacing:-0.045em;text-transform:uppercase;">{{ p.title }}</span>
+              <span style="flex:none;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;">View case →</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;">
+          <h3 style="font-size:clamp(20px,1.8vw,26px);font-weight:800;letter-spacing:-0.03em;text-transform:uppercase;margin:0;">{{ p.title }}</h3>
+          <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;text-transform:uppercase;color:#5e5e5e;">{{ p.category }} / {{ p.year }}</span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section id="studio" data-screen-label="Studio" style="max-width:1600px;margin:0 auto;padding:clamp(120px,13vw,200px) clamp(20px,4vw,56px) 0;">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr));gap:32px clamp(32px,6vw,120px);align-items:start;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;">
+      <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#5e5e5e;">The studio</span>
+      <h2 style="font-size:clamp(36px,4.4vw,64px);font-weight:900;line-height:0.92;letter-spacing:-0.045em;text-transform:uppercase;margin:0;">A small studio on purpose</h2>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.6;color:#3a3a3a;max-width:62ch;">
+      <p style="margin:0;">Northfold started in 2026 as two designers and one shared desk. Today we’re a team of designers, animators and art directors, still small enough that the people you meet are the people who do the work.</p>
+      <p style="margin:0;">We partner with founders, cultural institutions and established brands that are ready to change how they look, sound and move. Every project is led by a senior creative from first call to final file.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 380px), 1fr));gap:56px clamp(32px,6vw,120px);margin-top:clamp(100px,11vw,170px);align-items:start;">
+    <p data-reveal="" style="font-size:clamp(40px,5.6vw,92px);font-weight:900;line-height:0.9;letter-spacing:-0.05em;text-transform:uppercase;margin:0 0 0 -0.03em;">
+      <span style="display:block;">Northfold</span>
+      <span style="display:block;">doesn’t</span>
+      <span style="display:block;">decorate.</span>
+      <span style="display:block;">We find</span>
+      <span style="display:block;">one idea</span>
+      <span style="display:block;">and make</span>
+      <span style="display:block;color:#ee3524;">it move.</span>
+    </p>
+    <div style="display:flex;flex-direction:column;">
+      <sc-for list="{{ process }}" as="s" hint-placeholder-count="4">
+        <div data-reveal="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:24px 0;border-top:1px solid #0b0b0b;">
+          <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:14px;color:#ee3524;">{{ s.num }}</span>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <span style="font-size:clamp(26px,2.4vw,36px);font-weight:900;line-height:1;letter-spacing:-0.04em;text-transform:uppercase;">{{ s.title }}</span>
+            <p style="margin:0;font-size:16px;line-height:1.55;color:#5e5e5e;max-width:44ch;">{{ s.text }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+</section>
+
+<section id="services" data-screen-label="Services" style="max-width:1600px;margin:0 auto;padding:clamp(120px,13vw,200px) clamp(20px,4vw,56px) 0;">
+  <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(28px,3vw,40px);">
+    <h2 style="font-size:clamp(44px,7vw,112px);font-weight:900;line-height:0.88;letter-spacing:-0.05em;text-transform:uppercase;margin:0 0 0 -0.03em;">Services</h2>
+    <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#5e5e5e;">Strategy to launch, under one roof</span>
+  </div>
+  <div style="border-bottom:1px solid #0b0b0b;">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="7">
+      <div style="display:grid;grid-template-columns:clamp(40px,5vw,80px) minmax(0,1.2fr) minmax(0,1fr);gap:8px 24px;align-items:center;padding:clamp(18px,2vw,28px) clamp(0px,1vw,16px);border-top:1px solid #0b0b0b;color:#0b0b0b;background:transparent;transition:background .3s ease, color .3s ease;" style-hover="background:#0b0b0b;color:#ffffff;">
+        <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:14px;color:#ee3524;">{{ s.num }}</span>
+        <span style="font-size:clamp(26px,3.8vw,60px);font-weight:900;line-height:0.95;letter-spacing:-0.045em;text-transform:uppercase;">{{ s.name }}</span>
+        <span style="font-size:16px;line-height:1.5;opacity:0.7;grid-column:{{ s.descCol }};">{{ s.desc }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="gallery" data-screen-label="Gallery" style="margin-top:clamp(120px,13vw,200px);background:#0b0b0b;color:#ffffff;">
+  <div style="max-width:1600px;margin:0 auto;padding:clamp(80px,9vw,140px) clamp(20px,4vw,56px) 0;">
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;">
+      <h2 style="font-size:clamp(44px,7vw,112px);font-weight:900;line-height:0.88;letter-spacing:-0.05em;text-transform:uppercase;margin:0 0 0 -0.03em;"><span style="display:block;">Interactive</span><span style="display:block;color:#ee3524;">gallery</span></h2>
+    </div>
+  </div>
+
+  <div ref="{{ stripSec }}" style="position:relative;height:300vh;">
+    <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:28px;">
+      <div style="max-width:1600px;width:100%;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;justify-content:space-between;gap:16px;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#a3a3a3;">
+        <span>Frames from the studio, 2024–2026</span>
+        <span>Keep scrolling →</span>
+      </div>
+      <div ref="{{ track }}" style="display:flex;align-items:flex-end;gap:clamp(12px,1.6vw,24px);padding:0 clamp(20px,4vw,56px);width:max-content;will-change:transform;">
+        <sc-for list="{{ frames }}" as="f" hint-placeholder-count="8">
+          <figure style="flex:none;margin:0;display:flex;flex-direction:column;gap:12px;">
+            <div style="height:min(60svh, 600px);aspect-ratio:{{ f.ratio }};border-radius:4px;overflow:hidden;background:#1c1c1c;color:#8a8a8a;">
+              <image-slot id="{{ f.slotId }}" shape="rect" placeholder="{{ f.ph }}"></image-slot>
+            </div>
+            <figcaption style="margin:0;display:flex;justify-content:space-between;gap:16px;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;text-transform:uppercase;color:#a3a3a3;">
+              <span style="color:#ee3524;">{{ f.num }}</span><span>{{ f.label }}</span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1600px;margin:0 auto;padding:clamp(80px,9vw,140px) clamp(20px,4vw,56px) 0;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:20px;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#a3a3a3;">
+      <span>Image reveals</span>
+      <span>Hover or tap a card</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr));gap:clamp(12px,1.6vw,24px);">
+      <sc-for list="{{ reveals }}" as="r" hint-placeholder-count="3">
+        <div data-reveal="" onMouseEnter="{{ r.enter }}" onMouseLeave="{{ r.leave }}" onClick="{{ r.toggle }}" style="position:relative;aspect-ratio:4 / 5;border-radius:4px;overflow:hidden;background:#1c1c1c;cursor:pointer;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,2vw,28px);">
+            <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;color:#ee3524;">{{ r.num }}</span>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:clamp(32px,3.4vw,52px);font-weight:900;line-height:0.9;letter-spacing:-0.045em;text-transform:uppercase;">{{ r.title }}</span>
+              <span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;text-transform:uppercase;color:#a3a3a3;">{{ r.label }}</span>
+            </div>
+          </div>
+          <div style="position:absolute;inset:0;color:#8a8a8a;background:#262626;transition:clip-path .9s cubic-bezier(.7,0,.2,1);clip-path:{{ r.clip }};">
+            <image-slot id="{{ r.slotId }}" shape="rect" placeholder="{{ r.ph }}"></image-slot>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:clamp(80px,9vw,140px) 0 clamp(80px,9vw,140px);">
+    <div style="max-width:1600px;margin:0 auto 24px;padding:0 clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;color:#a3a3a3;">
+      <span>Our motto, in motion</span>
+    </div>
+    <div style="max-width:1600px;margin:0 auto;padding:0 clamp(20px,4vw,56px);">
+      <div aria-label="Make it move" style="display:flex;flex-wrap:wrap;column-gap:0.22em;font-size:clamp(64px,15vw,260px);font-weight:900;line-height:0.85;letter-spacing:-0.06em;text-transform:uppercase;margin-left:-0.04em;">
+        <sc-for list="{{ letters }}" as="w" hint-placeholder-count="0">
+          <span style="display:inline-flex;white-space:nowrap;">
+            <sc-for list="{{ w.chars }}" as="l" hint-placeholder-count="0">
+              <span aria-hidden="true" style="display:inline-block;cursor:default;transition:transform .45s cubic-bezier(.2,.7,.2,1), color .25s ease;" style-hover="transform:translateY(-0.12em) rotate(-6deg);color:#ee3524;">{{ l }}</span>
+            </sc-for>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+    <div style="margin-top:clamp(40px,5vw,72px);border-top:1px solid #2a2a2a;border-bottom:1px solid #2a2a2a;overflow:hidden;">
+      <div ref="{{ marquee }}" style="display:flex;width:max-content;padding:18px 0;">
+        <sc-for list="{{ marqueeItems }}" as="m" hint-placeholder-count="0">
+          <span style="flex:none;display:flex;align-items:center;gap:28px;padding-right:28px;font-size:clamp(22px,2.4vw,36px);font-weight:800;letter-spacing:-0.03em;text-transform:uppercase;white-space:nowrap;">{{ m }}<span style="width:10px;height:10px;background:#ee3524;display:block;"></span></span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#0b0b0b;color:#ffffff;border-top:1px solid #2a2a2a;">
+  <div style="max-width:1600px;margin:0 auto;padding:40px clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;text-transform:uppercase;">
+    <span style="font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:20px;font-weight:900;letter-spacing:-0.03em;">Northfold</span>
+    <a href="mailto:hello@northfold.studio" style="color:#ffffff;text-decoration:none;" style-hover="color:#ee3524;">hello@northfold.studio</a>
+    <span style="color:#a3a3a3;">© 2026 Northfold Studio</span>
+    <a href="#top" style="color:#ffffff;text-decoration:none;" style-hover="color:#ee3524;">Back to the top ↑</a>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;workLayout&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Editorial&quot;, &quot;Dense&quot;], &quot;default&quot;: &quot;Editorial&quot;, &quot;tsType&quot;: &quot;'Editorial' | 'Dense'&quot;}}">
+class Component extends DCLogic {
+  state = { projects: [], filter: 'All', hot: -1, rev: -1, ba: 50, wordI: 0, narrow: false, menu: false, scrolled: false };
+  root = React.createRef(); wordRef = React.createRef(); stripSec = React.createRef(); track = React.createRef();
+  bar = React.createRef(); baRef = React.createRef(); marquee = React.createRef();
+  words = ['move', 'speak', 'last', 'sell'];
+  cats = ['All', 'Brand Identity', 'Graphic Design', 'UI/UX', 'Campaign Design', 'Packaging', 'Motion/Video'];
+  ease = 'cubic-bezier(.2,.7,.2,1)';
+
+  motionOn() { return this.props.motion !== false && !matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  componentDidMount() {
+    fetch('projects.json').then(r => r.json()).then(projects => this.setState({ projects }, () => { this.observe(); this.onResize(); }));
+    this.onResize();
+    addEventListener('resize', this.onResize);
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    if (window.ResizeObserver) { this.ro = new ResizeObserver(() => this.onResize()); this.track.current && this.ro.observe(this.track.current); }
+    const root = this.root.current;
+    if (this.motionOn() && root) {
+      root.querySelectorAll('[data-hero-line]').forEach((el, i) => el.animate(
+        [{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1100, delay: 120 + i * 140, easing: this.ease, fill: 'backwards' }));
+      root.querySelectorAll('[data-hero-fade]').forEach(el => el.animate(
+        [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 650, easing: this.ease, fill: 'backwards' }));
+    }
+    setTimeout(() => {
+      const m = this.marquee.current;
+      if (m && this.motionOn()) this.mq = m.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 32000, iterations: Infinity });
+    }, 300);
+    this.timer = setInterval(() => {
+      if (!this.motionOn()) return;
+      this.setState(s => ({ wordI: (s.wordI + 1) % this.words.length }), () => {
+        const w = this.wordRef.current;
+        w && w.animate([{ transform: 'translateY(60%)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 650, easing: this.ease });
+      });
+    }, 2400);
+    this.observe();
+  }
+
+  componentWillUnmount() {
+    removeEventListener('resize', this.onResize);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    clearInterval(this.timer);
+    this.io && this.io.disconnect(); this.ro && this.ro.disconnect(); this.mq && this.mq.cancel();
+  }
+
+  observe() {
+    const root = this.root.current;
+    if (!root || !this.motionOn() || !window.IntersectionObserver) return;
+    this.seen = this.seen || new WeakSet();
+    this.io = this.io || new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.animate([{ opacity: 0, transform: 'translateY(32px)' }, { opacity: 1, transform: 'none' }], { duration: 900, easing: this.ease, fill: 'backwards' });
+      this.io.unobserve(e.target);
+    }));
+    root.querySelectorAll('[data-reveal]').forEach(el => {
+      if (this.seen.has(el)) return;
+      this.seen.add(el);
+      if (el.getBoundingClientRect().top < innerHeight) return;
+      this.io.observe(el);
+    });
+  }
+
+  onResize = () => {
+    const narrow = innerWidth < 820;
+    if (narrow !== this.state.narrow) this.setState({ narrow, menu: false });
+    const sec = this.stripSec.current, tr = this.track.current;
+    if (sec && tr) sec.style.height = Math.max(innerHeight, tr.scrollWidth - innerWidth + innerHeight) + 'px';
+    this.updateStrip();
+  };
+
+  onScroll = () => {
+    if (this.ticking) return;
+    this.ticking = true;
+    requestAnimationFrame(() => {
+      this.ticking = false;
+      this.updateStrip();
+      const root = this.root.current;
+      if (root) { const s = root.getBoundingClientRect().top < -20; if (s !== this.state.scrolled) this.setState({ scrolled: s }); }
+    });
+  };
+
+  updateStrip() {
+    const sec = this.stripSec.current, tr = this.track.current;
+    if (!sec || !tr) return;
+    const r = sec.getBoundingClientRect();
+    const total = sec.offsetHeight - innerHeight;
+    const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+    tr.style.transform = `translate3d(${-p * Math.max(0, tr.scrollWidth - innerWidth)}px,0,0)`;
+    if (this.bar.current) this.bar.current.style.transform = `scaleX(${p})`;
+  }
+
+  setBa(clientX) {
+    const el = this.baRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    this.setState({ ba: Math.round(Math.min(100, Math.max(0, (clientX - r.left) / r.width * 100))) });
+  }
+
+  renderVals() {
+    const { projects, filter, hot, rev, ba, narrow, menu, scrolled } = this.state;
+    const dense = this.props.workLayout === 'Dense';
+    const href = slug => `Case%20Study.dc.html?p=${slug}`;
+    const shownCount = projects.filter(p => filter === 'All' || p.category === filter).length;
+    const tiles = projects.map((p, i) => {
+      const on = hot === i;
+      return {
+        ...p, href: href(p.slug), slotId: `cover-${p.slug}`, ph: `Cover — ${p.title}`,
+        display: filter === 'All' || p.category === filter ? 'flex' : 'none',
+        scale: on ? 'scale(1.04)' : 'scale(1)', ov: on ? 1 : 0,
+        ovY: on ? 'none' : 'translateY(-16px)', ovY2: on ? 'none' : 'translateY(24px)',
+        enter: () => this.setState({ hot: i }), leave: () => this.setState({ hot: -1 }),
+      };
+    });
+    const cats = this.cats.map(name => {
+      const on = filter === name;
+      return { name, pick: () => this.setState({ filter: name, hot: -1 }), col: on ? '#0b0b0b' : '#8a8a8a', bd: on ? '#ee3524' : 'transparent' };
+    });
+    const services = [
+      ['Brand Identity', 'Names, marks, type, colour and the rules that hold them together.'],
+      ['Art Direction', 'Shoots, films and campaigns directed from concept to final frame.'],
+      ['Graphic Design', 'Print, editorial and environmental design with a point of view.'],
+      ['Digital Design', 'Websites, products and interfaces that look as good as they work.'],
+      ['Social Media Design', 'Content systems built for the feed, not resized for it.'],
+      ['Packaging Design', 'Structures and graphics that win on shelf and survive shipping.'],
+      ['Motion Graphics', 'Idents, product films and identities that move.'],
+    ].map(([name, desc], i) => ({ name, desc, num: String(i + 1).padStart(2, '0'), descCol: narrow ? '2 / -1' : 'auto' }));
+    const frames = [['Halden', 'Bag family', '4 / 5'], ['Signal FM', 'Ident still', '16 / 10'], ['Atlas', 'Wayfinding', '4 / 5'], ['Mora', 'Carton detail', '1 / 1'],
+      ['Tidewater', 'Poster wall', '4 / 5'], ['Orbit', 'App screens', '16 / 10'], ['Parallel', 'Cover series', '1 / 1'], ['Northline', 'Field shoot', '4 / 5']]
+      .map(([proj, what, ratio], i) => ({ num: String(i + 1).padStart(2, '0'), label: `${proj} — ${what}`, ratio, slotId: `frame-${i + 1}`, ph: `${proj} — ${what}` }));
+    const reveals = [['Mora', 'Packaging — carton system'], ['Signal FM', 'Motion — live logotype'], ['Parallel', 'Graphic design — cover series']]
+      .map(([title, label], i) => ({
+        title, label, num: String(i + 1).padStart(2, '0'), slotId: `reveal-${i + 1}`, ph: `${title} — ${label}`,
+        clip: rev === i ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)',
+        enter: () => { if (!narrow) this.setState({ rev: i }); }, leave: () => { if (!narrow) this.setState({ rev: -1 }); },
+        toggle: () => { if (narrow) this.setState(s => ({ rev: s.rev === i ? -1 : i })); },
+      }));
+    const disciplines = ['Brand Identity', 'Art Direction', 'Graphic Design', 'Digital Design', 'Social Media', 'Packaging', 'Motion Graphics'];
+    return {
+      root: this.root, wordRef: this.wordRef, stripSec: this.stripSec, track: this.track, bar: this.bar, baRef: this.baRef, marquee: this.marquee,
+      word: this.words[this.state.wordI],
+      wide: !narrow, narrow, menuOpen: narrow && menu, menuLabel: menu ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })), closeMenu: () => this.setState({ menu: false }),
+      navLine: scrolled || menu ? '#e3e3e0' : 'transparent',
+      cats, tiles, gridMin: dense ? '300px' : '440px',
+      countLabel: `${String(shownCount).padStart(2, '0')} projects`,
+      process: [
+        { num: '01', title: 'Listen', text: 'We start with questions, not moodboards. Your business before your logo.' },
+        { num: '02', title: 'Decide', text: 'One idea, agreed early and defended all the way to launch.' },
+        { num: '03', title: 'Make', text: 'A small senior team designs, tests and refines. No handoffs to juniors.' },
+        { num: '04', title: 'Move', text: 'Everything we design is built to live in motion, on every screen.' },
+      ],
+      services, frames, reveals,
+      baPos: ba, baLeft: `${ba}%`, baRight: `${100 - ba}%`,
+      baDown: e => { this.baDrag = true; e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); this.setBa(e.clientX); },
+      baMove: e => { if (this.baDrag) this.setBa(e.clientX); },
+      baUp: () => { this.baDrag = false; },
+      baKey: e => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); this.setState(s => ({ ba: Math.max(0, s.ba - 5) })); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); this.setState(s => ({ ba: Math.min(100, s.ba + 5) })); }
+      },
+      letters: 'Make it move'.split(' ').map(w => ({ chars: w.split('') })),
+      marqueeItems: [...disciplines, ...disciplines],
+    };
+  }
+}
+</script>
+</body>
+</html>
