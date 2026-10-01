@@ -4,7 +4,8 @@ import { gsap, reducedMotion } from './motion.js';
  * Pops a burst of 3D pixel-smiley coins out of `origin` (an element).
  * Each coin is a stack of discs (face, edge layers, back) in a
  * preserve-3d box, so it shows real thickness as it flips. Motion is a
- * small physics step on the GSAP ticker: launch, gravity, air drag, spin.
+ * small physics step on the GSAP ticker: radial launch, heavy air drag
+ * so they hang in place, spin, then shrink away.
  */
 const FACES = [
   { src: '/images/coin-happy.png', edge: '#1f9c62' },
@@ -44,18 +45,16 @@ function makeCoin(size) {
   return coin;
 }
 
-export function coinBurst(origin, { count = 26 } = {}) {
+export function coinBurst(origin, { count = 26, x, y } = {}) {
   if (!origin) return;
   const r = origin.getBoundingClientRect();
-  const ox = r.left + r.width / 2, oy = r.top + r.height / 2;
+  // burst from the click point if given, else the element's centre
+  const ox = x ?? r.left + r.width / 2, oy = y ?? r.top + r.height / 2;
   const reduced = reducedMotion();
   const n = reduced ? 8 : count;
 
-  // the logo itself gives a little squash-and-pop
+  // the clicked element squashes and pops
   gsap.fromTo(origin, { scale: 0.86 }, { scale: 1, duration: 0.7, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
-
-  // centre of the viewport, nudged up so coins arc rather than drop
-  const aim = Math.atan2(innerHeight * 0.4 - oy, innerWidth / 2 - ox);
 
   const host = getStage();
   const coins = [];
@@ -63,36 +62,41 @@ export function coinBurst(origin, { count = 26 } = {}) {
     const size = gsap.utils.random(56, 110);
     const el = makeCoin(size);
     host.appendChild(el);
-    // spray around the word, fanned toward the open part of the screen
-    const ang = aim + gsap.utils.random(-1.25, 1.25);
-    const speed = gsap.utils.random(520, 1150) * (reduced ? 0.5 : 1);
+    // evenly spread around a full circle, jittered so it doesn't look like a wheel
+    const ang = (i / n) * Math.PI * 2 + gsap.utils.random(-0.22, 0.22);
+    // distance travelled ≈ speed / DRAG, so this throws coins ~230–470px out
+    const speed = gsap.utils.random(1050, 2100) * (reduced ? 0.4 : 1);
     coins.push({
-      el, size,
-      x: ox + gsap.utils.random(-r.width / 2, r.width / 2), y: oy,
-      vx: Math.cos(ang) * speed, vy: Math.sin(ang) * speed - 520,
+      el, size, x: ox, y: oy,
+      vx: Math.cos(ang) * speed, vy: Math.sin(ang) * speed,
       rx: gsap.utils.random(0, 360), ry: gsap.utils.random(0, 360), rz: gsap.utils.random(-30, 30),
-      sx: reduced ? 0 : gsap.utils.random(-720, 720), sy: reduced ? 0 : gsap.utils.random(-900, 900), sz: gsap.utils.random(-180, 180),
-      life: 0, max: gsap.utils.random(1.8, 2.6), scale: 0,
+      sx: reduced ? 0 : gsap.utils.random(-900, 900), sy: reduced ? 0 : gsap.utils.random(-1100, 1100), sz: gsap.utils.random(-200, 200),
+      life: 0, max: gsap.utils.random(1.05, 1.45), scale: 0,
     });
   }
 
-  const G = 2200, DRAG = 0.6;
+  // strong air drag: coins shoot out, then decelerate and hang in place
+  const DRAG = 4.5, SPIN_DRAG = 2.2, OUT = 0.32;
   const tick = (time, dtMs) => {
     const dt = Math.min(dtMs, 40) / 1000;
+    const k = Math.exp(-DRAG * dt), ks = Math.exp(-SPIN_DRAG * dt);
     let alive = 0;
     for (const c of coins) {
       if (!c.el) continue;
       c.life += dt;
-      c.vy += G * dt;
-      c.vx *= 1 - DRAG * dt; c.vy *= 1 - DRAG * dt * 0.4;
+      c.vx *= k; c.vy *= k;
       c.x += c.vx * dt; c.y += c.vy * dt;
+      c.sx *= ks; c.sy *= ks; c.sz *= ks;
       c.rx += c.sx * dt; c.ry += c.sy * dt; c.rz += c.sz * dt;
-      c.scale = Math.min(1, c.scale + dt * 7);
-      const fade = gsap.utils.clamp(0, 1, (c.max - c.life) / 0.35);
-      c.el.style.opacity = fade;
+      // pop in fast with a little overshoot, shrink away at the end
+      const t = c.life;
+      let s = t < 0.18 ? gsap.parseEase('back.out(3)')(t / 0.18) : 1;
+      const end = gsap.utils.clamp(0, 1, (c.max - t) / OUT);
+      s *= end;
+      c.el.style.opacity = Math.min(1, end * 1.6);
       c.el.style.transform =
-        `translate3d(${c.x - c.size / 2}px, ${c.y - c.size / 2}px, 0) scale(${c.scale}) rotateX(${c.rx}deg) rotateY(${c.ry}deg) rotateZ(${c.rz}deg)`;
-      if (c.life >= c.max || c.y > innerHeight + 120) { c.el.remove(); c.el = null; } else alive++;
+        `translate3d(${c.x - c.size / 2}px, ${c.y - c.size / 2}px, 0) scale(${s}) rotateX(${c.rx}deg) rotateY(${c.ry}deg) rotateZ(${c.rz}deg)`;
+      if (t >= c.max) { c.el.remove(); c.el = null; } else alive++;
     }
     if (!alive) gsap.ticker.remove(tick);
   };
