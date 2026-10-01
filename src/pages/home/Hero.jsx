@@ -37,24 +37,31 @@ export default function Hero() {
         scrollTrigger: { trigger: root.current, start: 'top top', end: '45% top', scrub: true },
       });
 
-      /* Rotating accent word */
+      /* Rotating accent word. GSAP owns every word's transform: all words
+         share one grid cell, and inactive ones sit below the mask. */
       const words = gsap.utils.toArray('.hero__word', rot.current);
       let i = 0;
-      gsap.set(words, { yPercent: 110 });
+      gsap.set(words, { y: 0, yPercent: 110, opacity: 1 });
       gsap.set(words[0], { yPercent: 0 });
-      gsap.set(rot.current, { width: words[0].offsetWidth });
+      const fit = () => gsap.set(rot.current, { width: words[i].offsetWidth });
+      fit();
+      document.fonts?.ready.then(fit);
+      window.addEventListener('resize', fit);
+
+      // delayedCall runs on the GSAP ticker, so it pauses with hidden tabs
+      // instead of queueing overlapping swaps like setInterval would.
+      let call;
       const tick = () => {
         const cur = words[i];
         i = (i + 1) % words.length;
         const next = words[i];
-        gsap.timeline()
+        gsap.timeline({ onComplete: () => { call = gsap.delayedCall(1.8, tick); } })
           .to(cur, { yPercent: -110, duration: 0.8, ease: 'expo.inOut' })
           .fromTo(next, { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: 'expo.inOut' }, 0)
           .to(rot.current, { width: next.offsetWidth, duration: 0.8, ease: 'expo.inOut' }, 0);
       };
-      const id = setInterval(tick, 2600);
-      document.fonts?.ready.then(() => gsap.set(rot.current, { width: words[i].offsetWidth }));
-      return () => clearInterval(id);
+      call = gsap.delayedCall(2.6, tick);
+      return () => { call?.kill(); window.removeEventListener('resize', fit); };
     });
   }, { scope: root });
 
@@ -101,12 +108,12 @@ export default function Hero() {
         .hero__line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
         .hero__line > span { display: block; }
         .hero__rot {
-          display: inline-block; position: relative; overflow: hidden;
-          vertical-align: bottom; height: 1.06em; white-space: nowrap;
+          display: inline-grid; grid-template-columns: max-content; justify-items: start;
+          overflow: hidden; white-space: nowrap;
+          padding-bottom: .12em; margin-bottom: -.12em;
         }
-        .hero__word { position: absolute; left: 0; top: 0; }
-        .hero__word:first-child { position: relative; }
-        .hero__word:not(:first-child) { transform: translateY(110%); }
+        .hero__word { grid-area: 1 / 1; }
+        .hero__word:not(:first-child) { opacity: 0; }
         .hero__row {
           display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
           padding-bottom: clamp(32px, 4vw, 56px);

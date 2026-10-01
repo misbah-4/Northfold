@@ -39,8 +39,10 @@ h1, h2, h3, h4, p { margin: 0; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 ::selection { background: var(--accent); color: #fff; }
 
-/* SplitText line masks */
-.line { padding-bottom: 0.06em; margin-bottom: -0.06em; }
+/* SplitText line masks: pad the line so descenders clear the clip,
+   and pull the mask back up so line spacing is unchanged. */
+.line { padding-bottom: 0.12em; }
+.line-mask { margin-bottom: -0.12em; }
 
 /* ── Type ────────────────────────────────────────────────────── */
 .display {
