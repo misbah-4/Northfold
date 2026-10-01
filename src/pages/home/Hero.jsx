@@ -69,7 +69,7 @@ export default function Hero() {
   return (
     <section ref={root} className="hero" id="top">
       <div className="wrap hero__head">
-        <h1 className="display hero__title" aria-label="We make brands that move." data-cursor-zone="arrow">
+        <h1 className="display hero__title" aria-label="We make brands that move.">
           <span className="hero__line" aria-hidden="true"><span>We make brands</span></span>
           <span className="hero__line" aria-hidden="true">
             <span>

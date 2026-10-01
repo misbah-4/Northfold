@@ -117,7 +117,6 @@ export default function Footer() {
       <div
         className="foot__mark-wrap"
         aria-hidden="true"
-        data-cursor-zone="arrow"
         onClick={e => coinBurst(e.target.closest('.foot__char') || e.currentTarget, { x: e.clientX, y: e.clientY })}
       >
         <div ref={mark} className="foot__mark">

@@ -7,35 +7,25 @@ const PULLS_ELEMENT = '[data-magnetic], .nav__links a, .nav__logo, .foot__mail, 
 
 const DOT = 12, RING = 44, LABEL = 96;
 
-// Pink 3D pixel arrow, used inside [data-cursor-zone="arrow"] (hero headline, footer wordmark)
-const ARROW_W = 72;
-const TIP = { x: 12.7 * ARROW_W / 128, y: 11.2 * ARROW_W / 128 }; // tip inside cursor.png (128×136)
-
 /**
  * Circle cursor.
  * - a small dot that trails the pointer
  * - over links/buttons it grows into a ring and is pulled toward the
  *   target's centre; small targets (nav, footer…) drift toward it too
  * - over `data-cursor="Label"` it becomes the white label circle
- * - inside `data-cursor-zone="arrow"` it swaps for the pink 3D pixel arrow
  * Touch devices and reduced motion keep the native cursor.
  */
 export default function Cursor() {
   const el = useRef(null);
   const txt = useRef(null);
-  const arrow = useRef(null);
 
   useEffect(() => {
-    const c = el.current, t = txt.current, a = arrow.current;
+    const c = el.current, t = txt.current;
     if (!c || reducedMotion() || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     document.documentElement.classList.add('has-cursor');
     const xTo = gsap.quickTo(c, 'x', { duration: 0.35, ease: 'power3.out' });
     const yTo = gsap.quickTo(c, 'y', { duration: 0.35, ease: 'power3.out' });
-    const axTo = gsap.quickTo(a, 'x', { duration: 0.18, ease: 'power3.out' });
-    const ayTo = gsap.quickTo(a, 'y', { duration: 0.18, ease: 'power3.out' });
-    const rotTo = gsap.quickTo(a.firstChild, 'rotation', { duration: 0.5, ease: 'power3.out' });
-    let inZone = false, lastX = 0, idle = 0;
 
     let target = null, label = null, pulled = null, shown = false;
     let mode = null;
@@ -60,15 +50,8 @@ export default function Cursor() {
       const { clientX: px, clientY: py } = e;
       if (!shown) {
         shown = true;
-        gsap.set([c, a], { x: px, y: py });
-      }
-
-      // zone swap: circle ↔ pink arrow
-      const z = !!e.target.closest?.('[data-cursor-zone="arrow"]');
-      if (z !== inZone || !c._shownOnce) {
-        inZone = z; c._shownOnce = true;
-        gsap.to(c, { autoAlpha: z ? 0 : 1, scale: z ? 0.3 : 1, duration: 0.25, overwrite: 'auto' });
-        gsap.to(a, { autoAlpha: z ? 1 : 0, scale: z ? 1 : 0.5, duration: 0.3, ease: 'back.out(2)', overwrite: 'auto' });
+        gsap.set(c, { x: px, y: py });
+        gsap.to(c, { autoAlpha: 1, duration: 0.3 });
       }
 
       const l = e.target.closest?.('[data-cursor]');
@@ -96,17 +79,11 @@ export default function Cursor() {
       }
       xTo(cx);
       yTo(cy);
-      axTo(cx);
-      ayTo(cy);
-      rotTo(gsap.utils.clamp(-14, 14, (px - lastX) * 0.6));
-      lastX = px;
-      clearTimeout(idle);
-      idle = setTimeout(() => rotTo(0), 90);
     };
 
-    const down = () => gsap.to(inZone ? a : c, { scale: 0.8, duration: 0.12, ease: 'power2.in', overwrite: 'auto' });
-    const up = () => gsap.to(inZone ? a : c, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
-    const hide = () => { shown = false; c._shownOnce = false; release(); gsap.to([c, a], { autoAlpha: 0, duration: 0.2 }); };
+    const down = () => gsap.to(c, { scale: 0.8, duration: 0.12, ease: 'power2.in', overwrite: 'auto' });
+    const up = () => gsap.to(c, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+    const hide = () => { shown = false; release(); gsap.to(c, { autoAlpha: 0, duration: 0.2 }); };
 
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('pointerdown', down);
@@ -114,7 +91,6 @@ export default function Cursor() {
     document.documentElement.addEventListener('pointerleave', hide);
     return () => {
       release();
-      clearTimeout(idle);
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerdown', down);
       window.removeEventListener('pointerup', up);
@@ -124,19 +100,8 @@ export default function Cursor() {
   }, []);
 
   return (
-    <>
-      <div ref={el} className="cursor" aria-hidden="true">
-        <span ref={txt} className="cursor__label" />
-      </div>
-      <div ref={arrow} className="cursor-arrow" aria-hidden="true">
-        <img
-          src="/images/cursor.png"
-          alt=""
-          width={ARROW_W}
-          draggable="false"
-          style={{ marginLeft: -TIP.x, marginTop: -TIP.y, transformOrigin: `${TIP.x}px ${TIP.y}px` }}
-        />
-      </div>
-    </>
+    <div ref={el} className="cursor" aria-hidden="true">
+      <span ref={txt} className="cursor__label" />
+    </div>
   );
 }

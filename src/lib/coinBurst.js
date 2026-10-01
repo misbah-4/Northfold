@@ -2,18 +2,25 @@ import { gsap, reducedMotion } from './motion.js';
 
 /**
  * Pops a burst of 3D pixel-smiley coins out of `origin` (an element).
- * Each coin is a stack of discs (face, edge layers, back) in a
- * preserve-3d box, so it shows real thickness as it flips. Motion is a
- * small physics step on the GSAP ticker: radial launch, heavy air drag
- * so they hang in place, spin, then shrink away.
+ *
+ * Coins are built in CSS 3D (no WebGL): a front and back face plus a
+ * stack of rim slices in a preserve-3d box. The slices nearest each face
+ * are slightly smaller and lighter, which reads as a rounded bevel.
+ * Every frame each coin is lit by a fixed key light: the faces darken or
+ * catch a highlight as they turn, and the rim colour follows.
+ * Motion: radial launch, heavy air drag so they hang in place, spin,
+ * then shrink away.
  */
 const FACES = [
-  { src: '/images/coin-happy.png', edge: '#1f9c62' },
-  { src: '/images/coin-sad.png', edge: '#c41848' },
-  { src: '/images/coin-neutral.png', edge: '#c41848' },
+  { src: '/images/coin-happy.webp', rim: [35, 168, 108], dark: [10, 70, 42] },
+  { src: '/images/coin-sad.webp', rim: [226, 26, 80], dark: [104, 8, 36] },
+  { src: '/images/coin-neutral.webp', rim: [226, 26, 80], dark: [104, 8, 36] },
 ];
-const LAYERS = 6;      // edge slices
+const SLICES = 14;     // rim slices
 const THICK = 0.16;    // thickness as a fraction of diameter
+const FACE_INSET = 0.955;
+// key light from the upper left, toward the viewer (CSS y points down)
+const L = (() => { const v = [-0.38, -0.55, 0.74]; const m = Math.hypot(...v); return v.map(c => c / m); })();
 
 let stage = null;
 function getStage() {
@@ -32,17 +39,46 @@ function makeCoin(size) {
   coin.className = 'coin';
   coin.style.width = coin.style.height = `${size}px`;
   const t = size * THICK;
-  const layer = (z, html) => {
+
+  for (let i = 0; i < SLICES; i++) {
+    const u = i / (SLICES - 1);                  // 0 … 1 across the thickness
+    const e = Math.min(u, 1 - u) * (SLICES - 1); // slices from the nearest face
     const d = document.createElement('div');
-    d.className = 'coin__layer';
-    d.style.transform = `translateZ(${z}px)`;
-    if (html) d.innerHTML = html; else d.style.background = f.edge;
+    d.className = 'coin__rim';
+    const scale = e < 1 ? 0.968 : e < 2 ? 0.99 : 1;
+    const lift = e < 1 ? 22 : e < 2 ? 10 : 0;    // bevel catches more light
+    d.style.transform = `translateZ(${-t / 2 + t * u}px) scale(${scale})`;
+    d.style.background = `color-mix(in srgb, var(--rim), #fff ${lift}%)`;
     coin.appendChild(d);
+  }
+  const face = (z, flip) => {
+    const w = document.createElement('div');
+    w.className = 'coin__face';
+    w.style.transform = `translateZ(${z}px) ${flip ? 'rotateY(180deg) ' : ''}scale(${FACE_INSET})`;
+    w.innerHTML = `<img src="${f.src}" alt="" draggable="false"><i class="coin__shade"></i><i class="coin__shine"></i>`;
+    coin.appendChild(w);
+    return { shade: w.children[1], shine: w.children[2] };
   };
-  layer(-t / 2, `<img src="${f.src}" alt="" draggable="false" style="transform:scaleX(-1)">`);
-  for (let i = 1; i < LAYERS; i++) layer(-t / 2 + (t * i) / LAYERS);
-  layer(t / 2, `<img src="${f.src}" alt="" draggable="false">`);
-  return coin;
+  const back = face(-t / 2 - 0.5, true);
+  const front = face(t / 2 + 0.5, false);
+  return { el: coin, front, back, mat: f };
+}
+
+const mix = (a, b, k) => `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * k)).join(',')})`;
+
+/** Shade one coin for its current orientation. */
+function light(c) {
+  const m = new DOMMatrix(`rotateX(${c.rx}deg) rotateY(${c.ry}deg) rotateZ(${c.rz}deg)`);
+  const n = m.transformPoint(new DOMPoint(0, 0, 1));
+  const lam = n.x * L[0] + n.y * L[1] + n.z * L[2];           // front face vs light
+  for (const [f, l] of [[c.front, lam], [c.back, -lam]]) {
+    const k = Math.max(0, l);
+    f.shade.style.opacity = Math.max(0, 0.45 - 0.6 * k).toFixed(3);
+    f.shine.style.opacity = (Math.max(0, k - 0.72) * 2.2).toFixed(3);
+  }
+  // the rim faces sideways: brightest when the faces are edge-on to the light
+  const rimLit = 0.35 + 0.65 * Math.sqrt(Math.max(0, 1 - lam * lam)) * (0.6 + 0.4 * Math.max(0, -n.y));
+  c.el.style.setProperty('--rim', mix(c.mat.dark, c.mat.rim, Math.min(1, rimLit)));
 }
 
 export function coinBurst(origin, { count = 26, x, y } = {}) {
@@ -60,14 +96,14 @@ export function coinBurst(origin, { count = 26, x, y } = {}) {
   const coins = [];
   for (let i = 0; i < n; i++) {
     const size = gsap.utils.random(56, 110);
-    const el = makeCoin(size);
-    host.appendChild(el);
+    const coin = makeCoin(size);
+    host.appendChild(coin.el);
     // evenly spread around a full circle, jittered so it doesn't look like a wheel
     const ang = (i / n) * Math.PI * 2 + gsap.utils.random(-0.22, 0.22);
     // distance travelled ≈ speed / DRAG, so this throws coins ~230–470px out
     const speed = gsap.utils.random(1050, 2100) * (reduced ? 0.4 : 1);
     coins.push({
-      el, size, x: ox, y: oy,
+      ...coin, size, x: ox, y: oy,
       vx: Math.cos(ang) * speed, vy: Math.sin(ang) * speed,
       rx: gsap.utils.random(0, 360), ry: gsap.utils.random(0, 360), rz: gsap.utils.random(-30, 30),
       sx: reduced ? 0 : gsap.utils.random(-900, 900), sy: reduced ? 0 : gsap.utils.random(-1100, 1100), sz: gsap.utils.random(-200, 200),
@@ -96,6 +132,7 @@ export function coinBurst(origin, { count = 26, x, y } = {}) {
       c.el.style.opacity = Math.min(1, end * 1.6);
       c.el.style.transform =
         `translate3d(${c.x - c.size / 2}px, ${c.y - c.size / 2}px, 0) scale(${s}) rotateX(${c.rx}deg) rotateY(${c.ry}deg) rotateZ(${c.rz}deg)`;
+      light(c);
       if (t >= c.max) { c.el.remove(); c.el = null; } else alive++;
     }
     if (!alive) gsap.ticker.remove(tick);
