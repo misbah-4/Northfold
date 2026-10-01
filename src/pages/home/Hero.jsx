@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { createTopo } from '../../lib/webgl/topo.js';
 import { gsap, useGSAP, introDone, scrollTo } from '../../lib/motion.js';
 import Media from '../../components/Media.jsx';
 
@@ -7,6 +8,19 @@ const WORDS = ['move', 'speak', 'last', 'sell'];
 export default function Hero() {
   const root = useRef(null);
   const rot = useRef(null);
+  const gl = useRef(null);
+
+  /* WebGL contour field behind the headline; silently skipped without WebGL */
+  useEffect(() => {
+    let destroy;
+    try {
+      destroy = createTopo(gl.current, {
+        still: matchMedia('(prefers-reduced-motion: reduce)').matches,
+      });
+      gl.current.classList.add('is-on');
+    } catch (e) { /* no WebGL: plain background */ }
+    return () => destroy?.();
+  }, []);
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -68,6 +82,7 @@ export default function Hero() {
 
   return (
     <section ref={root} className="hero" id="top">
+      <canvas ref={gl} className="hero__gl" aria-hidden="true" />
       <div className="wrap hero__head">
         <h1 className="display hero__title" aria-label="We make brands that move.">
           <span className="hero__line" aria-hidden="true"><span>We make brands</span></span>
@@ -103,7 +118,13 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .hero { padding-top: calc(var(--nav-h) + clamp(80px, 12vw, 200px)); }
+        .hero { position: relative; padding-top: calc(var(--nav-h) + clamp(80px, 12vw, 200px)); }
+        .hero__gl {
+          position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+          opacity: 0; transition: opacity 1.6s var(--ease);
+        }
+        .hero__gl.is-on { opacity: 1; }
+        .hero__head, .hero__frame { position: relative; }
         .hero__head { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 96px); }
         .hero__title { max-width: 14ch; will-change: transform; }
         .hero__line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
