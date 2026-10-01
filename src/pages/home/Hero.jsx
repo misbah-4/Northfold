@@ -67,9 +67,9 @@ export default function Hero() {
   }, { scope: root });
 
   return (
-    <section ref={root} className="hero" id="top" data-cursor-zone="arrow">
+    <section ref={root} className="hero" id="top">
       <div className="wrap hero__head">
-        <h1 className="display hero__title" aria-label="We make brands that move.">
+        <h1 className="display hero__title" aria-label="We make brands that move." data-cursor-zone="arrow">
           <span className="hero__line" aria-hidden="true"><span>We make brands</span></span>
           <span className="hero__line" aria-hidden="true">
             <span>
@@ -105,7 +105,7 @@ export default function Hero() {
       <style>{`
         .hero { padding-top: calc(var(--nav-h) + clamp(80px, 12vw, 200px)); }
         .hero__head { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 96px); }
-        .hero__title { max-width: 14ch; will-change: transform; }
+        .hero__title { max-width: 14ch; width: fit-content; will-change: transform; }
         .hero__line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
         .hero__line > span { display: block; }
         .hero__rot {
