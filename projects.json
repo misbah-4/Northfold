@@ -4,151 +4,561 @@
     "title": "Halden Roasters",
     "client": "Halden Coffee Roasters",
     "category": "Brand Identity",
-    "services": ["Brand Identity", "Packaging", "Art Direction"],
+    "services": [
+      "Brand Identity",
+      "Packaging",
+      "Art Direction"
+    ],
     "year": "2026",
     "tagline": "A coffee brand built like a field journal.",
     "challenge": "Halden had outgrown its farmers-market look. Twelve origins, three retail partners and a subscription launch needed one system that could flex without losing its voice.",
     "approach": "We built the identity around the roaster's own logbook: a stamped wordmark, a typographic origin grid and a colour code per roast level that works from bag to app.",
     "process": [
-      {"title": "Audit", "text": "Two days on the roastery floor, 40 competitor bags, one honest workshop."},
-      {"title": "Direction", "text": "Three territories. The logbook won on day one."},
-      {"title": "System", "text": "Wordmark, origin grid, roast colours, 14 bag variants."},
-      {"title": "Rollout", "text": "Packaging, café signage, subscription app and launch film."}
+      {
+        "title": "Audit",
+        "text": "Two days on the roastery floor, 40 competitor bags, one honest workshop."
+      },
+      {
+        "title": "Direction",
+        "text": "Three territories. The logbook won on day one."
+      },
+      {
+        "title": "System",
+        "text": "Wordmark, origin grid, roast colours, 14 bag variants."
+      },
+      {
+        "title": "Rollout",
+        "text": "Packaging, café signage, subscription app and launch film."
+      }
     ],
     "outcome": "The new range launched in 60 stores and the subscription sold out its first batch in four days.",
-    "results": [{"value": "60", "label": "Retail doors at launch"}, {"value": "4 days", "label": "To first sell-out"}, {"value": "+38%", "label": "Online conversion"}]
+    "results": [
+      {
+        "value": "60",
+        "label": "Retail doors at launch"
+      },
+      {
+        "value": "4 days",
+        "label": "To first sell-out"
+      },
+      {
+        "value": "+38%",
+        "label": "Online conversion"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/halden-1.webp",
+        "alt": "Halden kraft coffee bag with stamped label on a warm studio backdrop"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/halden-2.webp",
+        "alt": "Roasted coffee beans in a roasting drum"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/halden-3.webp",
+        "alt": "Halden kraft tote bag with green wordmark"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/halden-4.webp",
+        "alt": "Roaster scooping fresh beans from a sack"
+      }
+    ]
   },
   {
     "slug": "orbit",
     "title": "Orbit Banking",
     "client": "Orbit Financial",
     "category": "UI/UX",
-    "services": ["UI/UX", "Digital Design", "Motion Graphics"],
+    "services": [
+      "UI/UX",
+      "Digital Design",
+      "Motion Graphics"
+    ],
     "year": "2025",
     "tagline": "Money, made legible.",
     "challenge": "Orbit's app did everything and explained nothing. New users dropped off before their first transfer.",
     "approach": "We rebuilt the core flows around one screen: where your money is, where it's going and what happens next, with motion that shows cause and effect.",
     "process": [
-      {"title": "Research", "text": "24 user interviews and a full funnel teardown."},
-      {"title": "Architecture", "text": "Nine tabs cut to four. One home screen."},
-      {"title": "Interface", "text": "A component library of 180 parts, built with Orbit's engineers."},
-      {"title": "Motion", "text": "Transitions that trace every transfer end to end."}
+      {
+        "title": "Research",
+        "text": "24 user interviews and a full funnel teardown."
+      },
+      {
+        "title": "Architecture",
+        "text": "Nine tabs cut to four. One home screen."
+      },
+      {
+        "title": "Interface",
+        "text": "A component library of 180 parts, built with Orbit's engineers."
+      },
+      {
+        "title": "Motion",
+        "text": "Transitions that trace every transfer end to end."
+      }
     ],
     "outcome": "Onboarding completion rose sharply in the first quarter after release, and support tickets about transfers halved.",
-    "results": [{"value": "+52%", "label": "Onboarding completion"}, {"value": "−50%", "label": "Transfer support tickets"}, {"value": "4.8", "label": "App store rating"}]
+    "results": [
+      {
+        "value": "+52%",
+        "label": "Onboarding completion"
+      },
+      {
+        "value": "−50%",
+        "label": "Transfer support tickets"
+      },
+      {
+        "value": "4.8",
+        "label": "App store rating"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/orbit-1.webp",
+        "alt": "Hand holding a phone showing the Orbit balance screen"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/orbit-2.webp",
+        "alt": "Phone on a wooden table showing a spending chart"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/orbit-3.webp",
+        "alt": "Hand holding a phone with a dark banking interface"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/orbit-4.webp",
+        "alt": "Hands typing on a phone"
+      }
+    ]
   },
   {
     "slug": "tidewater",
     "title": "Tidewater Festival",
     "client": "Tidewater Arts Trust",
     "category": "Campaign Design",
-    "services": ["Campaign Design", "Social Media Design", "Motion Graphics"],
+    "services": [
+      "Campaign Design",
+      "Social Media Design",
+      "Motion Graphics"
+    ],
     "year": "2025",
     "tagline": "Three days, one rising line.",
     "challenge": "A coastal arts festival in its tenth year needed to feel new again and reach an audience under 30.",
     "approach": "A single line that rises with the tide chart runs through every poster, story and stage screen. Each day of the festival gets its own tide.",
     "process": [
-      {"title": "Idea", "text": "The tide table as the festival's timetable."},
-      {"title": "Toolkit", "text": "A generative line tool the in-house team could run."},
-      {"title": "Campaign", "text": "Posters, OOH, 120 social assets, stage visuals."},
-      {"title": "Live", "text": "Real-time tide data on the main stage screens."}
+      {
+        "title": "Idea",
+        "text": "The tide table as the festival's timetable."
+      },
+      {
+        "title": "Toolkit",
+        "text": "A generative line tool the in-house team could run."
+      },
+      {
+        "title": "Campaign",
+        "text": "Posters, OOH, 120 social assets, stage visuals."
+      },
+      {
+        "title": "Live",
+        "text": "Real-time tide data on the main stage screens."
+      }
     ],
     "outcome": "The festival sold out a week early, with its youngest audience on record.",
-    "results": [{"value": "Sold out", "label": "One week early"}, {"value": "2.1M", "label": "Social impressions"}, {"value": "41%", "label": "Audience under 30"}]
+    "results": [
+      {
+        "value": "Sold out",
+        "label": "One week early"
+      },
+      {
+        "value": "2.1M",
+        "label": "Social impressions"
+      },
+      {
+        "value": "41%",
+        "label": "Audience under 30"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/tidewater-1.webp",
+        "alt": "Tidewater festival poster in a bus shelter"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/tidewater-2.webp",
+        "alt": "Festival crowd with raised hands at sunset"
+      },
+      {
+        "type": "video",
+        "src": "/videos/tidewater-waves.mp4",
+        "poster": "/videos/tidewater-waves.jpg",
+        "alt": "Aerial footage of waves rolling onto a beach"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/tidewater-4.webp",
+        "alt": "Confetti over a festival crowd at night"
+      }
+    ]
   },
   {
     "slug": "mora",
     "title": "Mora Skincare",
     "client": "Mora Laboratories",
     "category": "Packaging",
-    "services": ["Packaging Design", "Brand Identity", "Art Direction"],
+    "services": [
+      "Packaging Design",
+      "Brand Identity",
+      "Art Direction"
+    ],
     "year": "2025",
     "tagline": "Clinical, without the cold.",
     "challenge": "Mora's formulas were serious; its packaging looked like everyone else's. It needed shelf presence in pharmacies and at premium retail.",
     "approach": "Uncoated tactile board, a single ingredient set in large type per product and a colour system drawn from the ingredients themselves.",
     "process": [
-      {"title": "Shelf study", "text": "Photographed 300 SKUs across 12 retailers."},
-      {"title": "Structure", "text": "One carton form, refillable glass, no plastic windows."},
-      {"title": "Graphics", "text": "Ingredient-led typography and a 9-colour palette."},
-      {"title": "Production", "text": "Press checks and print specs for three manufacturers."}
+      {
+        "title": "Shelf study",
+        "text": "Photographed 300 SKUs across 12 retailers."
+      },
+      {
+        "title": "Structure",
+        "text": "One carton form, refillable glass, no plastic windows."
+      },
+      {
+        "title": "Graphics",
+        "text": "Ingredient-led typography and a 9-colour palette."
+      },
+      {
+        "title": "Production",
+        "text": "Press checks and print specs for three manufacturers."
+      }
     ],
     "outcome": "Mora entered two national pharmacy chains within six months of the relaunch.",
-    "results": [{"value": "2", "label": "National chains"}, {"value": "100%", "label": "Recyclable cartons"}, {"value": "9", "label": "Products relaunched"}]
+    "results": [
+      {
+        "value": "2",
+        "label": "National chains"
+      },
+      {
+        "value": "100%",
+        "label": "Recyclable cartons"
+      },
+      {
+        "value": "9",
+        "label": "Products relaunched"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/mora-1.webp",
+        "alt": "Three white Mora skincare bottles on a plinth"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/mora-2.webp",
+        "alt": "Unlabelled cream jar on a beige backdrop"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/mora-3.webp",
+        "alt": "Dropper bottle and cream on white"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/mora-4.webp",
+        "alt": "Amber glass bottles in soft window light"
+      }
+    ]
   },
   {
     "slug": "signal",
     "title": "Signal FM Idents",
     "client": "Signal FM",
     "category": "Motion/Video",
-    "services": ["Motion Graphics", "Art Direction", "Brand Identity"],
+    "services": [
+      "Motion Graphics",
+      "Art Direction",
+      "Brand Identity"
+    ],
     "year": "2026",
     "tagline": "A radio station you can watch.",
     "challenge": "Signal FM moved onto video platforms and had no visual language beyond a logo.",
     "approach": "We turned the station's audio waveform into a living logotype that reacts to whatever is on air, then built a library of idents around it.",
     "process": [
-      {"title": "Sound", "text": "Mapped the station's audio to shape, weight and speed."},
-      {"title": "Logotype", "text": "A variable wordmark driven by live audio."},
-      {"title": "Idents", "text": "24 idents, stings and show openers."},
-      {"title": "Toolkit", "text": "Templates the station's editors use daily."}
+      {
+        "title": "Sound",
+        "text": "Mapped the station's audio to shape, weight and speed."
+      },
+      {
+        "title": "Logotype",
+        "text": "A variable wordmark driven by live audio."
+      },
+      {
+        "title": "Idents",
+        "text": "24 idents, stings and show openers."
+      },
+      {
+        "title": "Toolkit",
+        "text": "Templates the station's editors use daily."
+      }
     ],
     "outcome": "The idents now run across every stream and show, and the station's video audience has grown each month since launch.",
-    "results": [{"value": "24", "label": "Idents and stings"}, {"value": "3×", "label": "Video audience"}, {"value": "Daily", "label": "In-house template use"}]
+    "results": [
+      {
+        "value": "24",
+        "label": "Idents and stings"
+      },
+      {
+        "value": "3×",
+        "label": "Video audience"
+      },
+      {
+        "value": "Daily",
+        "label": "In-house template use"
+      }
+    ],
+    "media": [
+      {
+        "type": "video",
+        "src": "/videos/signal.mp4",
+        "poster": "/videos/signal.jpg",
+        "alt": "Silhouette dancing in pink haze, from the Signal FM idents"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/signal-2.webp",
+        "alt": "Microphone against a pink wall"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/signal-3.webp",
+        "alt": "Microphone against a blue backdrop"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/signal-4.webp",
+        "alt": "Studio microphone on black"
+      }
+    ]
   },
   {
     "slug": "atlas",
     "title": "Atlas Biennale",
     "client": "Atlas Architecture Biennale",
     "category": "Graphic Design",
-    "services": ["Graphic Design", "Art Direction", "Digital Design"],
+    "services": [
+      "Graphic Design",
+      "Art Direction",
+      "Digital Design"
+    ],
     "year": "2024",
     "tagline": "An exhibition you can read from across the room.",
     "challenge": "Forty pavilions, four languages and a site the size of a small town. Visitors kept getting lost.",
     "approach": "An oversized grid of numbers and arrows that works as signage, catalogue and website at once. Every pavilion got a number and a colour.",
     "process": [
-      {"title": "Wayfinding", "text": "Walked the site with the curators and mapped every route."},
-      {"title": "System", "text": "Numbers, arrows and a four-language type hierarchy."},
-      {"title": "Print", "text": "A 400-page catalogue and 1,200 signs."},
-      {"title": "Digital", "text": "A companion site built on the same grid."}
+      {
+        "title": "Wayfinding",
+        "text": "Walked the site with the curators and mapped every route."
+      },
+      {
+        "title": "System",
+        "text": "Numbers, arrows and a four-language type hierarchy."
+      },
+      {
+        "title": "Print",
+        "text": "A 400-page catalogue and 1,200 signs."
+      },
+      {
+        "title": "Digital",
+        "text": "A companion site built on the same grid."
+      }
     ],
     "outcome": "Visitor surveys ranked navigation as the biennale's most improved area year on year.",
-    "results": [{"value": "40", "label": "Pavilions"}, {"value": "1,200", "label": "Signs produced"}, {"value": "400 pp", "label": "Catalogue"}]
+    "results": [
+      {
+        "value": "40",
+        "label": "Pavilions"
+      },
+      {
+        "value": "1,200",
+        "label": "Signs produced"
+      },
+      {
+        "value": "400 pp",
+        "label": "Catalogue"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/atlas-1.webp",
+        "alt": "Atlas Biennale posters, yellow grid and black A/26"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/atlas-2.webp",
+        "alt": "White gallery corridor"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/atlas-3.webp",
+        "alt": "Industrial exhibition hall with large prints"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/atlas-4.webp",
+        "alt": "Gallery room hung with paintings"
+      }
+    ]
   },
   {
     "slug": "northline",
     "title": "Northline Outdoor",
     "client": "Northline Equipment Co.",
     "category": "Brand Identity",
-    "services": ["Brand Identity", "Art Direction", "Social Media Design"],
+    "services": [
+      "Brand Identity",
+      "Art Direction",
+      "Social Media Design"
+    ],
     "year": "2024",
     "tagline": "Gear for people who read the forecast twice.",
     "challenge": "A trusted technical outdoor brand looked dated next to newer, louder competitors.",
     "approach": "We kept the heritage mark, redrew it for small sizes and built a photographic style around real weather, real people and no retouching.",
     "process": [
-      {"title": "Heritage", "text": "Dug through 40 years of catalogues."},
-      {"title": "Mark", "text": "Redrawn for embroidery, tags and app icons."},
-      {"title": "Photography", "text": "Directed three shoots in actual bad weather."},
-      {"title": "Guidelines", "text": "A 90-page system for global retail partners."}
+      {
+        "title": "Heritage",
+        "text": "Dug through 40 years of catalogues."
+      },
+      {
+        "title": "Mark",
+        "text": "Redrawn for embroidery, tags and app icons."
+      },
+      {
+        "title": "Photography",
+        "text": "Directed three shoots in actual bad weather."
+      },
+      {
+        "title": "Guidelines",
+        "text": "A 90-page system for global retail partners."
+      }
     ],
     "outcome": "The refresh rolled out across 14 markets without losing a single long-standing retail partner.",
-    "results": [{"value": "14", "label": "Markets"}, {"value": "3", "label": "Photo shoots"}, {"value": "90 pp", "label": "Guidelines"}]
+    "results": [
+      {
+        "value": "14",
+        "label": "Markets"
+      },
+      {
+        "value": "3",
+        "label": "Photo shoots"
+      },
+      {
+        "value": "90 pp",
+        "label": "Guidelines"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/northline-1.webp",
+        "alt": "Hiker on a ridge at golden hour"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/northline-2.webp",
+        "alt": "Northline canvas tote with mountain mark"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/northline-3.webp",
+        "alt": "Hiker in a red jacket in snowy mountains"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/northline-4.webp",
+        "alt": "Climber below a snow-covered peak"
+      }
+    ]
   },
   {
     "slug": "parallel",
     "title": "Parallel Records",
     "client": "Parallel Records",
     "category": "Graphic Design",
-    "services": ["Graphic Design", "Art Direction", "Motion Graphics"],
+    "services": [
+      "Graphic Design",
+      "Art Direction",
+      "Motion Graphics"
+    ],
     "year": "2024",
     "tagline": "One label, a hundred covers, zero templates.",
     "challenge": "An independent label releasing weekly needed covers that felt related without looking templated.",
     "approach": "A set of rules instead of a template: fixed type position, a shared grid and one photographic constraint per season. Every cover is different; the shelf still reads as Parallel.",
     "process": [
-      {"title": "Rules", "text": "Seven rules every cover must follow."},
-      {"title": "Covers", "text": "The first 30 releases, designed in-house with the label."},
-      {"title": "Motion", "text": "Animated covers for streaming platforms."},
-      {"title": "Handover", "text": "A rulebook so any designer can join in."}
+      {
+        "title": "Rules",
+        "text": "Seven rules every cover must follow."
+      },
+      {
+        "title": "Covers",
+        "text": "The first 30 releases, designed in-house with the label."
+      },
+      {
+        "title": "Motion",
+        "text": "Animated covers for streaming platforms."
+      },
+      {
+        "title": "Handover",
+        "text": "A rulebook so any designer can join in."
+      }
     ],
     "outcome": "The label has released over 100 covers under the system, with six external designers contributing.",
-    "results": [{"value": "100+", "label": "Covers released"}, {"value": "7", "label": "Rules"}, {"value": "6", "label": "Guest designers"}]
+    "results": [
+      {
+        "value": "100+",
+        "label": "Covers released"
+      },
+      {
+        "value": "7",
+        "label": "Rules"
+      },
+      {
+        "value": "6",
+        "label": "Guest designers"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/work/parallel-1.webp",
+        "alt": "Parallel Records vinyl with pink and ink label"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/parallel-2.webp",
+        "alt": "Hand holding a vinyl record against lilac"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/parallel-3.webp",
+        "alt": "Red vinyl spinning"
+      },
+      {
+        "type": "image",
+        "src": "/images/work/parallel-4.webp",
+        "alt": "Black vinyl on an orange backdrop"
+      }
+    ]
   }
 ]

@@ -47,7 +47,8 @@ Every effect is wrapped in `gsap.matchMedia()`: the horizontal rail and the pinn
 ├── index.html
 ├── public/
 │   ├── projects.json            # Project data (fetched at runtime)
-│   └── images/blueprint.jpg     # Hero / CTA image
+│   ├── images/work/             # Project photography + brand mockups
+│   └── videos/                  # Motion clips + poster frames
 └── src/
     ├── main.jsx
     ├── App.jsx                  # SmoothScroll + Preloader + Navbar + Cursor + routes
@@ -58,7 +59,7 @@ Every effect is wrapped in `gsap.matchMedia()`: the horizontal rail and the pinn
     │   ├── Preloader.jsx
     │   ├── Navbar.jsx
     │   ├── Cursor.jsx           # Pointer follower for [data-cursor] elements
-    │   ├── ProjectArt.jsx       # Per-project typographic cover art (swap for real images)
+    │   ├── Media.jsx            # Image / in-view video renderer
     │   └── Footer.jsx
     └── pages/
         ├── HomePage.jsx
@@ -127,15 +128,16 @@ Tokens live in [`src/index.css`](./src/index.css): `--bg` `#050505`, `--surface`
 
 ---
 
-## Adding Real Images
+## Images & motion
 
-Project covers are rendered by `<ProjectArt slug="…" />`. Pass `src` to use a real image instead:
+Each project in `public/projects.json` has a `media` array: `media[0]` is the cover (work rail and case study hero),
+`media[1..3]` fill the case study gallery. Items are `{ "type": "image" | "video", "src", "poster"?, "alt" }` and render
+through `<Media>`, which lazy-loads images and only plays videos while they are on screen.
 
-```jsx
-<ProjectArt slug="halden" title="Halden Roasters" src="/images/halden-cover.jpg" />
-```
+- `public/images/work/` — project photography and brand mockups (WebP, max 1800px)
+- `public/videos/` — muted, looping motion clips (H.264, ~10s, under 1.1MB each) with poster frames
 
-Place images in `public/images/`.
+Sources and licences for every file are listed in [`CREDITS.md`](./CREDITS.md).
 
 ---
 

@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, introDone, scrollTo } from '../../lib/motion.js';
+import Media from '../../components/Media.jsx';
 
 const WORDS = ['move', 'speak', 'last', 'sell'];
 
@@ -93,7 +94,7 @@ export default function Hero() {
 
       <div className="hero__frame">
         <div className="hero__media">
-          <img className="hero__img" src="/images/blueprint.jpg" alt="Blueprint drawing in deep blue with white linework" />
+          <div className="hero__img"><Media item={{ type: 'video', src: '/videos/hero-ink.mp4', poster: '/videos/hero-ink.jpg', alt: 'Red ink blooming through water' }} eager /></div>
           <div className="hero__caption wrap">
             <span className="label">Selected work 2026—27</span>
             <span className="label">Brand · Motion · Digital</span>
@@ -127,11 +128,12 @@ export default function Hero() {
           position: relative; overflow: hidden;
           height: clamp(380px, 52vw, 860px);
           border-radius: calc(var(--inset) * 0.5);
-          background: #0d2a66;
+          background: #e6e4e2;
         }
         .hero__img { width: 100%; height: 124%; object-fit: cover; position: absolute; top: -12%; left: 0; }
         .hero__caption {
-          position: absolute; left: 0; right: 0; bottom: 20px;
+          position: absolute; left: 0; right: 0; bottom: 0; padding-top: 80px; padding-bottom: 20px;
+          background: linear-gradient(to top, rgba(0,0,0,.35), transparent);
           display: flex; justify-content: space-between;
         }
         .hero__caption .label { color: #fff; }

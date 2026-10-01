@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { gsap, useGSAP, ScrollTrigger, revealLines, introDone } from '../lib/motion.js';
 import Footer from '../components/Footer.jsx';
-import ProjectArt from '../components/ProjectArt.jsx';
+import Media from '../components/Media.jsx';
 
+// media[0] is the cover; the gallery shows the rest
 const GALLERY = [
-  { cls: 'g--wide', caption: 'Hero application' },
-  { cls: 'g--tall', caption: 'Detail' },
-  { cls: 'g--tall', caption: 'In context' },
-  { cls: 'g--wide', caption: 'System overview' },
+  { cls: 'g--wide', caption: 'In the world', i: 1 },
+  { cls: 'g--tall', caption: 'Detail', i: 2 },
+  { cls: 'g--tall', caption: 'In context', i: 3 },
 ];
 
 /** Animates the numeric part of "+38%", "4 days", "60" etc. */
@@ -117,7 +117,7 @@ export default function CaseStudyPage() {
         </header>
 
         <div className="cs__cover">
-          <div className="cs__cover-in"><ProjectArt slug={project.slug} title={project.title} /></div>
+          <div className="cs__cover-in"><Media item={project.media?.[0]} eager /></div>
         </div>
 
         <section className="wrap cs__two">
@@ -145,7 +145,7 @@ export default function CaseStudyPage() {
           {GALLERY.map(g => (
             <figure key={g.caption} className={`g ${g.cls}`}>
               <div className="g__frame">
-                <div className="g__in"><ProjectArt slug={project.slug} title={`${project.title} — ${g.caption}`} /></div>
+                <div className="g__in"><Media item={project.media?.[g.i]} /></div>
               </div>
               <figcaption className="label">{g.caption}</figcaption>
             </figure>
@@ -170,7 +170,7 @@ export default function CaseStudyPage() {
             <div className="wrap cs__next-in">
               <span className="label">Next project</span>
               <span className="display cs__next-title">{next.title}</span>
-              <span className="cs__next-art"><ProjectArt slug={next.slug} title={next.title} /></span>
+              <span className="cs__next-art"><Media item={next.media?.[0]} /></span>
             </div>
           </Link>
         )}

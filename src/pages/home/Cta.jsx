@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap, useGSAP, revealLines, magnetic, press } from '../../lib/motion.js';
+import Media from '../../components/Media.jsx';
 
 /**
  * "Have a project in mind?" — the image pins in place and the footer
@@ -48,7 +49,7 @@ export default function Cta() {
       </div>
       <div className="cta__media">
         <div className="cta__zoom">
-          <img className="cta__img" src="/images/blueprint.jpg" alt="" />
+          <div className="cta__img"><Media item={{ type: 'video', src: '/videos/cta-ink.mp4', poster: '/videos/cta-ink.jpg', alt: '' }} /></div>
         </div>
       </div>
 
@@ -66,7 +67,7 @@ export default function Cta() {
           transition: background .5s var(--ease), color .5s var(--ease);
         }
         .cta__btn:hover { background: var(--white); color: #0b0b0b; }
-        .cta__media { position: relative; height: 100vh; overflow: hidden; background: #0d2a66; }
+        .cta__media { position: relative; height: 100vh; overflow: hidden; background: #000; }
         .cta__zoom { position: absolute; inset: 0; }
         .cta__img { position: absolute; left: 0; top: -15%; width: 100%; height: 130%; object-fit: cover; }
         @media (max-width: 640px) {

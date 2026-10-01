@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap, useGSAP, revealLines } from '../../lib/motion.js';
-import ProjectArt from '../../components/ProjectArt.jsx';
+import Media from '../../components/Media.jsx';
 
 export default function Work({ projects }) {
   const root = useRef(null);
@@ -70,7 +70,7 @@ export default function Work({ projects }) {
           {projects.map((p, i) => (
             <Link key={p.slug} to={`/case-study/${p.slug}`} className="card" data-cursor="View">
               <div className="card__art">
-                <div className="card__art-in"><ProjectArt slug={p.slug} title={p.title} /></div>
+                <div className="card__art-in"><Media item={p.media?.[0]} /></div>
               </div>
               <div className="card__meta">
                 <div className="card__row">
@@ -112,8 +112,8 @@ export default function Work({ projects }) {
           position: absolute; inset: 0 -12%;
           transition: transform 1s var(--ease);
         }
-        .card:hover .card__art-in .project-art { transform: scale(1.06); }
-        .card__art-in .project-art { transition: transform 1.2s var(--ease); }
+        .card__art-in .media { transition: transform 1.2s var(--ease); }
+        .card:hover .card__art-in .media { transform: scale(1.06); }
         .card__meta { display: flex; flex-direction: column; gap: 10px; }
         .card__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
         .card__title { font-size: clamp(20px, 1.6vw, 28px); font-weight: 400; letter-spacing: -0.02em; }
