@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar.jsx';
+import { ScrollTrigger } from '../lib/motion.js';
 import Footer from '../components/Footer.jsx';
-import HeroSection    from './home/HeroSection.jsx';
-import WorkSection    from './home/WorkSection.jsx';
-import StudioSection  from './home/StudioSection.jsx';
-import ServicesSection from './home/ServicesSection.jsx';
-import GallerySection from './home/GallerySection.jsx';
+import Hero from './home/Hero.jsx';
+import About from './home/About.jsx';
+import Work from './home/Work.jsx';
+import Services from './home/Services.jsx';
+import Clients from './home/Clients.jsx';
+import Cta from './home/Cta.jsx';
 
 export default function HomePage() {
   const [projects, setProjects] = useState([]);
@@ -18,17 +19,25 @@ export default function HomePage() {
       .catch(console.error);
   }, []);
 
+  // The work rail mounts its pin after the sections below it, so put
+  // triggers back in page order before re-measuring.
+  useEffect(() => {
+    if (!projects.length) return;
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
+  }, [projects.length]);
+
   return (
-    <div id="top" style={{ position: 'relative', overflowX: 'clip' }}>
-      <Navbar />
+    <>
       <main>
-        <HeroSection />
-        <WorkSection projects={projects} />
-        <StudioSection />
-        <ServicesSection />
-        <GallerySection />
+        <Hero />
+        <About />
+        <Work projects={projects} />
+        <Services />
+        <Clients />
+        <Cta />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

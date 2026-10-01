@@ -11,40 +11,65 @@ A modern, animated portfolio website for **Northfold**, an independent brand and
 | Bundler | [Vite](https://vitejs.dev/) v5 |
 | UI | [React](https://react.dev/) 18 |
 | Routing | [React Router](https://reactrouter.com/) v6 |
-| Styling | Vanilla CSS (CSS custom properties) |
-| Animations | Web Animations API + CSS transitions |
-| Fonts | [Inter Tight](https://fonts.google.com/specimen/Inter+Tight) + [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) via Google Fonts |
+| Smooth scroll | [Lenis](https://github.com/darkroomengineering/lenis), driven by the GSAP ticker |
+| Animation | [GSAP](https://gsap.com/) 3 + ScrollTrigger + SplitText, via `@gsap/react` (`useGSAP`) |
+| Styling | Vanilla CSS (custom properties) + component-scoped `<style>` blocks |
+| Fonts | Inter Tight + IBM Plex Mono via Google Fonts |
 
-No UI framework, no Tailwind — just CSS tokens and hand-crafted components.
+---
+
+## Motion system
+
+All shared motion lives in [`src/lib/motion.js`](./src/lib/motion.js): plugin registration, the Lenis instance
+(`duration: 1.2`, expo easing, synced to `ScrollTrigger.update`), an `introDone` promise that sections wait on until
+the preloader lifts, and micro-interactions (`magnetic`, `press`, `revealLines`).
+
+| Section | Effect |
+|---|---|
+| Preloader | Wordmark rises, 000→100 counter and progress bar, then the curtain lifts (`expo.inOut`) |
+| Navbar | `mix-blend-mode: difference`; hides on scroll down, returns on scroll up; fullscreen clip-path menu on mobile |
+| Hero | Masked line reveal, rotating accent word, media opens from the bottom, then widens to full bleed with parallax on scroll |
+| Studio | Statement lights up word by word (scrubbed SplitText), process rules draw in |
+| Selected work | Section pins and the card rail scrubs sideways; art parallaxes inside each card (`containerAnimation`); "View" cursor |
+| What we do | Pinned deck: each service card slides over the last, which scales down and dims |
+| Clients | Infinite rail that drifts, speeds up and skews with Lenis velocity, and can be dragged with inertia |
+| CTA | Image opens from a narrow window to full bleed, then pins while the footer slides over it |
+| Footer | Giant wordmark letters rise out of the floor, scrubbed to scroll |
+
+Every effect is wrapped in `gsap.matchMedia()`: the horizontal rail and the pinned deck become plain vertical stacks below
+768px, and `prefers-reduced-motion: reduce` disables Lenis and all scroll animation.
 
 ---
 
 ## Project Structure
 
 ```
-├── index.html                  # Root HTML shell
-├── package.json
-├── vite.config.js
-├── .gitignore
+├── index.html
 ├── public/
-│   └── projects.json           # Project data (fetched at runtime)
+│   ├── projects.json            # Project data (fetched at runtime)
+│   └── images/blueprint.jpg     # Hero / CTA image
 └── src/
-    ├── main.jsx                # React root + BrowserRouter
-    ├── App.jsx                 # Route definitions
-    ├── index.css               # Global reset, CSS tokens, utilities
+    ├── main.jsx
+    ├── App.jsx                  # SmoothScroll + Preloader + Navbar + Cursor + routes
+    ├── index.css                # Tokens, reset, shared utilities
+    ├── lib/motion.js            # GSAP + Lenis setup and helpers
     ├── components/
-    │   ├── Navbar.jsx          # Sticky responsive nav + mobile menu
-    │   ├── Footer.jsx          # Dark footer bar
-    │   └── ImageSlot.jsx       # Image placeholder component
+    │   ├── SmoothScroll.jsx     # Owns Lenis, resets scroll/triggers on route change
+    │   ├── Preloader.jsx
+    │   ├── Navbar.jsx
+    │   ├── Cursor.jsx           # Pointer follower for [data-cursor] elements
+    │   ├── ProjectArt.jsx       # Per-project typographic cover art (swap for real images)
+    │   └── Footer.jsx
     └── pages/
-        ├── HomePage.jsx        # Home page (fetches projects, assembles sections)
-        ├── CaseStudyPage.jsx   # Case study detail, driven by URL slug
+        ├── HomePage.jsx
+        ├── CaseStudyPage.jsx
         └── home/
-            ├── HeroSection.jsx     # Animated headline + rotating accent word
-            ├── WorkSection.jsx     # Filter tabs + hover-overlay project grid
-            ├── StudioSection.jsx   # About copy + numbered process steps
-            ├── ServicesSection.jsx # Hover-invert service rows
-            └── GallerySection.jsx  # Scroll strip, image reveals, marquee
+            ├── Hero.jsx
+            ├── About.jsx
+            ├── Work.jsx
+            ├── Services.jsx
+            ├── Clients.jsx
+            └── Cta.jsx
 ```
 
 ---
@@ -97,38 +122,20 @@ npm run preview
 
 ## Design System
 
-All colours, spacing and typography are defined as CSS custom properties in [`src/index.css`](./src/index.css):
-
-| Token | Value | Role |
-|---|---|---|
-| `--accent` | `#ee3524` | Red accent — borders, highlights, CTA hover |
-| `--black` | `#0b0b0b` | Near-black — body text, dark backgrounds |
-| `--white` | `#ffffff` | Page background |
-| `--muted` | `#5e5e5e` | Secondary text |
-| `--border` | `#e3e3e0` | Light dividers |
-| `--mono` | IBM Plex Mono | Monospaced labels, tags, captions |
-| `--pad-x` | `clamp(20px, 4vw, 56px)` | Responsive horizontal padding |
-| `--max-w` | `1600px` | Maximum content width |
+Tokens live in [`src/index.css`](./src/index.css): `--bg` `#050505`, `--surface` `#121212`, `--muted` `#8a8a8a`,
+`--line` `#262626`, `--accent` `#ee3524`, `--sans` Inter Tight, `--mono` IBM Plex Mono, `--pad-x`, `--nav-h`.
 
 ---
 
 ## Adding Real Images
 
-Image slots are currently rendered as styled placeholders via `<ImageSlot>`. To swap in a real image, replace the `<ImageSlot>` call in the relevant section component with a standard `<img>`:
+Project covers are rendered by `<ProjectArt slug="…" />`. Pass `src` to use a real image instead:
 
 ```jsx
-// Before
-<ImageSlot label="Cover — Halden Roasters" />
-
-// After
-<img
-  src="/images/halden-cover.jpg"
-  alt="Halden Roasters — brand cover"
-  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-/>
+<ProjectArt slug="halden" title="Halden Roasters" src="/images/halden-cover.jpg" />
 ```
 
-Place images in the `public/images/` folder so Vite serves them as static assets.
+Place images in `public/images/`.
 
 ---
 
