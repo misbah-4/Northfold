@@ -29,7 +29,6 @@ export default function Work({ projects }) {
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
-          onUpdate: self => gsap.set('.work__bar', { scaleX: self.progress }),
         },
       });
 
@@ -90,7 +89,6 @@ export default function Work({ projects }) {
           </a>
         </div>
 
-        <div className="wrap work__progress"><span className="work__bar" /></div>
       </div>
 
       <style>{`
@@ -128,9 +126,6 @@ export default function Work({ projects }) {
         .card--end:hover { background: var(--accent); border-color: var(--accent); }
         .card--end:hover .label, .card--end:hover .accent { color: #fff; }
         .card__end-title { font-size: clamp(36px, 3.6vw, 64px); line-height: .95; letter-spacing: -0.04em; }
-        .work__progress { height: 1px; }
-        .work__progress::before { content: ''; display: block; height: 1px; background: var(--line); }
-        .work__bar { display: block; height: 1px; margin-top: -1px; background: var(--white); transform: scaleX(0); transform-origin: left; }
 
         @media (max-width: 767px) {
           .work__pin { min-height: 0; padding-top: 96px; }
@@ -138,7 +133,6 @@ export default function Work({ projects }) {
           .card, .card:nth-child(3n + 2), .card--end { width: 100%; }
           .card:nth-child(3n + 2) .card__art { aspect-ratio: 4 / 3; }
           .card--end { min-height: 260px; }
-          .work__progress { display: none; }
         }
         @media (prefers-reduced-motion: reduce) and (min-width: 768px) {
           .work__track { width: auto; overflow-x: auto; }
