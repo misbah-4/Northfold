@@ -13,7 +13,6 @@ A modern, animated portfolio website for **Northfold**, an independent brand and
 | Routing | [React Router](https://reactrouter.com/) v6 |
 | Smooth scroll | [Lenis](https://github.com/darkroomengineering/lenis), driven by the GSAP ticker |
 | Animation | [GSAP](https://gsap.com/) 3 + ScrollTrigger + SplitText, via `@gsap/react` (`useGSAP`) |
-| WebGL | Hand-written WebGL2 shaders in `src/lib/webgl/` (no 3D library); falls back to plain DOM without WebGL2 |
 | Styling | Vanilla CSS (custom properties) + component-scoped `<style>` blocks |
 | Fonts | Inter Tight + IBM Plex Mono via Google Fonts |
 
@@ -29,9 +28,9 @@ the preloader lifts, and micro-interactions (`magnetic`, `press`, `revealLines`)
 |---|---|
 | Preloader | Wordmark rises, 000→100 counter and progress bar, then the curtain lifts (`expo.inOut`) |
 | Navbar | `mix-blend-mode: difference`; hides on scroll down, returns on scroll up; fullscreen clip-path menu on mobile |
-| Hero | WebGL contour-line field behind the headline (drifts, lifts and glows red around the pointer); masked line reveal, rotating accent word, media frame widens to full bleed on scroll |
+| Hero | Masked line reveal, rotating accent word, media opens from the bottom, then widens to full bleed with parallax on scroll |
 | Studio | Statement lights up word by word (scrubbed SplitText), process rules draw in |
-| Selected work | Pinned WebGL gallery: scrolling steps through projects (snapped); the active cover is a WebGL stage that noise-dissolves between projects, bends with scroll velocity and ripples under the pointer; a filmstrip of the rest parts around it. Plain vertical list on mobile / reduced motion |
+| Selected work | Section pins and the card rail scrubs sideways; art parallaxes inside each card (`containerAnimation`); "View" cursor |
 | What we do | Pinned deck: each service card slides over the last, which scales down and dims |
 | Clients | Infinite rail that drifts, speeds up and skews with Lenis velocity, and can be dragged with inertia |
 | CTA | Image opens from a narrow window to full bleed, then pins while the footer slides over it |
