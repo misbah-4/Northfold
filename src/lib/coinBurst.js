@@ -60,7 +60,7 @@ export function coinBurst(origin, { count = 26 } = {}) {
   const host = getStage();
   const coins = [];
   for (let i = 0; i < n; i++) {
-    const size = gsap.utils.random(30, 66);
+    const size = gsap.utils.random(56, 110);
     const el = makeCoin(size);
     host.appendChild(el);
     // spray around the word, fanned toward the open part of the screen

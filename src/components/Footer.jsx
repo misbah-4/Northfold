@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gsap, useGSAP, ScrollTrigger, SplitText, scrollTo } from '../lib/motion.js';
+import { coinBurst } from '../lib/coinBurst.js';
 
 const SITEMAP = [
   { label: 'Work',     hash: '#work' },
@@ -113,7 +114,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="foot__mark-wrap" aria-hidden="true" data-cursor-zone="arrow">
+      <div
+        className="foot__mark-wrap"
+        aria-hidden="true"
+        data-cursor-zone="arrow"
+        onClick={e => coinBurst(e.target.closest('.foot__char') || e.currentTarget)}
+      >
         <div ref={mark} className="foot__mark">
           {WORDMARK.split('').map((c, i) => (
             <span key={i} className="foot__char"><span>{c}</span></span>

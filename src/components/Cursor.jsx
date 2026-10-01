@@ -8,7 +8,7 @@ const PULLS_ELEMENT = '[data-magnetic], .nav__links a, .nav__logo, .foot__mail, 
 const DOT = 12, RING = 44, LABEL = 96;
 
 // Pink 3D pixel arrow, used inside [data-cursor-zone="arrow"] (hero, footer wordmark)
-const ARROW_W = 46;
+const ARROW_W = 72;
 const TIP = { x: 12.7 * ARROW_W / 128, y: 11.2 * ARROW_W / 128 }; // tip inside cursor.png (128×136)
 
 /**
