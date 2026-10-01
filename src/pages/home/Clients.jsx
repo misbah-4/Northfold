@@ -95,7 +95,6 @@ export default function Clients() {
     <section ref={root} className="clients" aria-label="Clients">
       <div className="wrap clients__head">
         <h2 className="lead">We’ve grown alongside<br /><span style={{ color: 'var(--muted)' }}>brands worth backing.</span></h2>
-        <span className="label">Drag to explore ⟷</span>
       </div>
       <div className="clients__viewport">
         <ul ref={rail} className="clients__rail" data-cursor="Drag">
