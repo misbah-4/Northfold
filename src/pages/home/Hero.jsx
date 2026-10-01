@@ -67,7 +67,7 @@ export default function Hero() {
   }, { scope: root });
 
   return (
-    <section ref={root} className="hero" id="top">
+    <section ref={root} className="hero" id="top" data-cursor-zone="arrow">
       <div className="wrap hero__head">
         <h1 className="display hero__title" aria-label="We make brands that move.">
           <span className="hero__line" aria-hidden="true"><span>We make brands</span></span>

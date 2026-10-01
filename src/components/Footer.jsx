@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="foot__mark-wrap" aria-hidden="true">
+      <div className="foot__mark-wrap" aria-hidden="true" data-cursor-zone="arrow">
         <div ref={mark} className="foot__mark">
           {WORDMARK.split('').map((c, i) => (
             <span key={i} className="foot__char"><span>{c}</span></span>

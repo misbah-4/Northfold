@@ -169,7 +169,15 @@ html.has-cursor input, html.has-cursor textarea { cursor: text !important; }
   color: #000; font-size: 15px; font-weight: 500; letter-spacing: .01em; white-space: nowrap;
   visibility: hidden; opacity: 0;
 }
-@media (hover: none) { .cursor { display: none; } }
+.cursor-arrow {
+  position: fixed; top: 0; left: 0; z-index: 1000; pointer-events: none;
+  visibility: hidden; opacity: 0;
+}
+.cursor-arrow img {
+  display: block; height: auto; max-width: none; user-select: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4)); will-change: transform;
+}
+@media (hover: none) { .cursor, .cursor-arrow { display: none; } }
 
 /* ── Coin burst (logo click) ─────────────────────────────────── */
 .coins { position: fixed; inset: 0; z-index: 999; pointer-events: none; perspective: 900px; overflow: hidden; }
