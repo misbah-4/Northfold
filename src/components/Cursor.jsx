@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { gsap, reducedMotion } from '../lib/motion.js';
 
-// Tip of the arrow inside cursor.png (128×114), in image pixels
-const TIP = { x: 4.5, y: 2.7 };
-const SIZE = 52;                    // rendered width in CSS px
+// Tip of the arrow inside cursor.png (128×136), in image pixels
+const TIP = { x: 12.7, y: 11.2 };
+const SIZE = 46;                    // rendered width in CSS px
 const K = SIZE / 128;
 
 // What the cursor is drawn to, and what is drawn to the cursor
@@ -11,7 +11,7 @@ const INTERACTIVE = 'a, button, [role="button"], input, textarea, select, label,
 const PULLS_ELEMENT = '[data-magnetic], .nav__links a, .nav__logo, .foot__mail, .foot__col a, .foot__base button, .u-link, .hero__scroll, .menu__row, .pill';
 
 /**
- * 3D pixel-arrow cursor.
+ * 3D pink pixel-arrow cursor.
  * - follows the pointer with a short lag and leans into its motion
  * - magnetic: over links and buttons it is pulled toward their centre,
  *   and small targets (nav, footer links…) drift toward it in return
