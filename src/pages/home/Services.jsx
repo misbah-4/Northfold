@@ -8,7 +8,7 @@ const SERVICES = [
   { name: 'Digital Design', media: { type: 'image', src: '/images/work/orbit-2.webp', alt: 'Phone on a table showing a spending chart' },   desc: 'Websites, products and interfaces that look as good as they work.', items: ['Websites', 'Product UI', 'Design systems', 'Prototypes'], bg: '#2b3cff', fg: '#fff' },
   { name: 'Motion Graphics', media: { type: 'video', src: '/videos/svc-motion.mp4', poster: '/videos/svc-motion.jpg', alt: 'Purple fluid paint swirling' },  desc: 'Idents, product films and identities that move.', items: ['Idents', 'Product films', '3D', 'Motion systems'], bg: '#f7d066', fg: '#0b0b0b' },
   { name: 'Packaging Design', media: { type: 'image', src: '/images/work/svc-packaging.webp', alt: 'Kraft coffee bag and cup on a pink backdrop' }, desc: 'Structures and graphics that win on shelf and survive shipping.', items: ['Structure', 'Graphics', 'Print production', 'Retail'], bg: '#a9c4c9', fg: '#0d2a33' },
-  { name: 'Social & Content', media: { type: 'video', src: '/videos/svc-social.mp4', poster: '/videos/svc-social.jpg', alt: 'Dancer lit by neon tubes' }, desc: 'Content systems built for the feed, not resized for it.', items: ['Templates', 'Launch kits', 'Editorial', 'Short form'], bg: '#1b1b1b', fg: '#fff' },
+  { name: 'Social & Content', media: { type: 'video', src: '/videos/svc-social.mp4', poster: '/videos/svc-social.jpg', alt: 'Hands stretching pastel clay on a pink backdrop' }, desc: 'Content systems built for the feed, not resized for it.', items: ['Templates', 'Launch kits', 'Editorial', 'Short form'], bg: '#1b1b1b', fg: '#fff' },
 ];
 
 export default function Services() {

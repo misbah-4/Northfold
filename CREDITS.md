@@ -50,6 +50,6 @@ All clips are from [Mixkit](https://mixkit.co) under the
 | `videos/cta-ink.mp4` | [#105](https://mixkit.co/free-stock-video/ink/) coloured ink on black |
 | `videos/svc-motion.mp4` | [#44821](https://mixkit.co/free-stock-video/ink/) purple fluid paint |
 | `videos/svc-silk.mp4` | [#40226](https://mixkit.co/free-stock-video/fabric/) gold silk |
-| `videos/svc-social.mp4` | [#33906](https://mixkit.co/free-stock-video/smoke/) dancer with neon tubes |
+| `videos/svc-social.mp4` | [#47332](https://mixkit.co/free-stock-video/color/) hands stretching pastel clay on pink |
 | `videos/signal.mp4` | [#33899](https://mixkit.co/free-stock-video/smoke/) silhouette in pink haze |
 | `videos/tidewater-waves.mp4` | [#51500](https://mixkit.co/free-stock-video/abstract/) aerial waves |

@@ -25,17 +25,21 @@ export default function Media({ item, className = '', eager = false, style }) {
   if (item.type === 'video') {
     return (
       <video
+        key={item.src}
         ref={ref}
         className={cls}
         style={style}
-        src={item.src}
         poster={item.poster}
         muted
         loop
         playsInline
         preload={eager ? 'auto' : 'metadata'}
         aria-label={item.alt}
-      />
+      >
+        {/* VP9 first (smaller, plays in every Chromium build); H.264 for older Safari */}
+        <source src={item.src.replace(/\.mp4$/, '.webm')} type="video/webm" />
+        <source src={item.src} type="video/mp4" />
+      </video>
     );
   }
   return (
