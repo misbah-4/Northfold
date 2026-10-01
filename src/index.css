@@ -149,18 +149,38 @@ a:hover .roll > span, button:hover .roll > span { transform: translateY(-100%); 
   100% { transform: translate(0, 0); }
 }
 
-/* ── Cursor follower ─────────────────────────────────────────── */
+/* ── Cursor ──────────────────────────────────────────────────── */
+/* Without JS (or with reduced motion) the arrow is still used, as a plain CSS cursor */
+@media (hover: hover) and (pointer: fine) {
+  html { cursor: url("/images/cursor-40.png") 1 1, auto; }
+  a, button, [role="button"], label, select { cursor: url("/images/cursor-40.png") 1 1, pointer; }
+}
+html.has-cursor, html.has-cursor * { cursor: none !important; }
+html.has-cursor input, html.has-cursor textarea { cursor: text !important; }
+
 .cursor {
-  position: fixed; top: 0; left: 0;
-  z-index: 95; pointer-events: none;
-  width: 96px; height: 96px; margin: -48px 0 0 -48px;
-  border-radius: 50%;
+  position: fixed; top: 0; left: 0; z-index: 1000; pointer-events: none;
+  visibility: hidden; opacity: 0;
+}
+.cursor__arrow {
+  display: block; height: auto; max-width: none; user-select: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35));
+  will-change: transform;
+}
+.cursor__chip {
+  position: absolute; left: 30px; top: 40px;
+  padding: 7px 12px; border-radius: 999px;
   background: var(--white); color: #000;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 500; letter-spacing: .02em;
-  transform: scale(0);
+  font-size: 13px; font-weight: 500; letter-spacing: .01em; white-space: nowrap;
+  visibility: hidden; opacity: 0; transform: scale(.4); transform-origin: 0 0;
 }
 @media (hover: none) { .cursor { display: none; } }
+
+/* ── Coin burst (logo click) ─────────────────────────────────── */
+.coins { position: fixed; inset: 0; z-index: 999; pointer-events: none; perspective: 900px; overflow: hidden; }
+.coin { position: absolute; left: 0; top: 0; transform-style: preserve-3d; will-change: transform, opacity; }
+.coin__layer { position: absolute; inset: 0; border-radius: 50%; backface-visibility: visible; }
+.coin__layer img { display: block; width: 100%; height: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }

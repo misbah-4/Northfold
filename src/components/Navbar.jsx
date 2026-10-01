@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap, ScrollTrigger, useGSAP, scrollTo, lockScroll, magnetic, press, introDone } from '../lib/motion.js';
+import { coinBurst } from '../lib/coinBurst.js';
 
 const LINKS = [
   { label: 'Work',     hash: '#work' },
@@ -80,7 +81,7 @@ export default function Navbar() {
     <>
       <header ref={root} className={`nav${open ? ' is-menu' : ''}`}>
         <div className="nav__inner wrap">
-          <Link to="/" className="nav__logo" aria-label="Northfold home" onClick={e => { if (pathname === '/') { e.preventDefault(); scrollTo(0, { duration: 1.6 }); } }}>
+          <Link to="/" className="nav__logo" aria-label="Northfold home" onClick={e => { coinBurst(e.currentTarget); if (pathname === '/') { e.preventDefault(); scrollTo(0, { duration: 1.6 }); } }}>
             <Roll>Northfold</Roll>
           </Link>
           <span className="nav__status label">
@@ -133,7 +134,7 @@ export default function Navbar() {
           height: var(--nav-h);
           display: flex; align-items: center; gap: 32px;
         }
-        .nav__logo { font-size: 26px; letter-spacing: -0.04em; font-weight: 500; }
+        .nav__logo { display: inline-block; font-size: 26px; letter-spacing: -0.04em; font-weight: 500; }
         .nav__status { display: flex; align-items: center; gap: 8px; color: #fff; opacity: .7; }
         .nav__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: navPing 2.4s ease-in-out infinite; }
         @keyframes navPing { 50% { opacity: .2; } }
