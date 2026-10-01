@@ -150,29 +150,24 @@ a:hover .roll > span, button:hover .roll > span { transform: translateY(-100%); 
 }
 
 /* ── Cursor ──────────────────────────────────────────────────── */
-/* Without JS (or with reduced motion) the arrow is still used, as a plain CSS cursor */
-@media (hover: hover) and (pointer: fine) {
-  html { cursor: url("/images/cursor-40.png") 4 3, auto; }
-  a, button, [role="button"], label, select { cursor: url("/images/cursor-40.png") 4 3, pointer; }
-}
 html.has-cursor, html.has-cursor * { cursor: none !important; }
 html.has-cursor input, html.has-cursor textarea { cursor: text !important; }
 
 .cursor {
   position: fixed; top: 0; left: 0; z-index: 1000; pointer-events: none;
+  width: 12px; height: 12px; translate: -50% -50%;
+  border-radius: 50%; background: var(--white);
+  display: flex; align-items: center; justify-content: center;
   visibility: hidden; opacity: 0;
+  transition: background-color .3s var(--ease), border-color .3s var(--ease);
+  border: 1px solid transparent;
 }
-.cursor__arrow {
-  display: block; height: auto; max-width: none; user-select: none;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4));
-  will-change: transform;
-}
-.cursor__chip {
-  position: absolute; left: 34px; top: 44px;
-  padding: 7px 12px; border-radius: 999px;
-  background: var(--white); color: #000;
-  font-size: 13px; font-weight: 500; letter-spacing: .01em; white-space: nowrap;
-  visibility: hidden; opacity: 0; transform: scale(.4); transform-origin: 0 0;
+.cursor:not(.is-label) { mix-blend-mode: difference; }
+.cursor.is-link { background: transparent; border-color: var(--white); }
+.cursor.is-label { background: var(--white); border-color: var(--white); }
+.cursor__label {
+  color: #000; font-size: 15px; font-weight: 500; letter-spacing: .01em; white-space: nowrap;
+  visibility: hidden; opacity: 0;
 }
 @media (hover: none) { .cursor { display: none; } }
 
